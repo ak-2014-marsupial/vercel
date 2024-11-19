@@ -10,7 +10,6 @@ app.use(cors("http://localhost:4000/api"))
 app.get("/api/test", (req, res) => {
     res.json(`Hello World ${Date.now()}`)
 })
-
 if (port) {
     app.listen(port)
     console.log(`Server has started on port ${port}`);

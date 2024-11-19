@@ -1,0 +1,22 @@
+:root {
+    --header-height: 10vh;
+    --header-min-height: 80px;
+    --row-min-height: 3rem;
+    /*--mobile-width: 400px;*/
+    --radius: 1em;
+
+    /*    color*/
+    --primary-color: #3498db; /* Blue */
+    --secondary-color: #F4F7FB; /* Green */
+    --background-color: #F1F2F3; /* White */
+    --text-color: #3E706D; /* Dark Gray */
+    --heading-color: #024543; /* Darker Gray */
+    --border-color: #e0e0e0; /* Light Gray */
+    --border-color-dark: #9E9E9E; /* Light Gray */
+    --link-color: #DDA94B;
+    --accent-color:#3E706D;
+    --success-color: #28a745; /* Green */
+    --error-color: #dc3545; /* Red */
+    --warning-color: #ffc107; /* Yellow */
+    --shadow-color:#9E9E9E;
+}

@@ -1,0 +1,30 @@
+.NavBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+    font-size: 1.8rem;
+    z-index: 2;
+    border: 1px solid red;
+}
+.NavBar a {
+    text-decoration: none;
+}
+.NavBar a[class="active"] {
+    color: var(--error-color)
+}
+.NavList{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    padding: 0 0.8em;
+}
+.NavItem{
+    color: var(--text-color);
+    text-align: center;
+}
+
+.NavItem:nth-child(n+2) {
+    margin-left: 0.7em;
+}
+
