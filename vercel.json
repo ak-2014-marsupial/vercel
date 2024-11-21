@@ -1,7 +1,27 @@
 {
+  "functions": {
+
+    "api/users.js": {
+      "memory": 128,
+      "maxDuration": 10
+    },
+    "api/test.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
+
   "rewrites": [
-    {"source": "/api/(.*)",
-    "destination": "/api"
+    {
+      "source": "/api/auth/(.*)",
+      "destination": "/api/auth.js"
+    },
+    {
+      "source": "/api/users/(.*)",
+      "destination": "/api/users.js"
     }
   ]
 }
+
+
+

@@ -5,7 +5,7 @@ const cors = require("cors")
 
 dotenv.config();
 const port = process.env.API_PORT;
-app.use(cors("http://localhost:4000/api"))
+app.use(cors("http://localhost:3000/api"))
 
 app.get("/api/test", (req, res) => {
     res.json(`Hello World ${Date.now()}`)

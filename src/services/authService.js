@@ -35,6 +35,7 @@ const authService = {
     getMe: () => {
         return apiService.get(urls.user.me)
     }
+
 }
 
 export {authService}
