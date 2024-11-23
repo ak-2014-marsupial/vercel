@@ -8,6 +8,7 @@ class AuthService {
     async signUp(dto) {
         const password = await passwordService.hashPassword(dto.password);
         const user = await userRepository.create({...dto, password});
+
         const tokens = await tokenService.generatePair({userId: user._id, role: user.role})
         await tokenRepository.create({...tokens, _userId: user._id});
         return {user, tokens}
@@ -23,7 +24,7 @@ class AuthService {
         return {user, tokens}
     }
 
-    async refresh(payload, oldTokenId) {
+    async refreshTokens(payload, oldTokenId) {
         const tokens = await tokenService.generatePair({
             userId: payload.userId,
             role: payload.role

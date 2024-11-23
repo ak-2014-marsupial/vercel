@@ -8,10 +8,10 @@ const connectDB = async () => {
             useUnifiedTopology: true,
         });
 
-        console.log(`2.MongoDB connected:${dbConnection.connection.host}:${dbConnection.connection.port}/${dbConnection.connection.name}`);
+        // console.log(`2.MongoDB connected:${dbConnection.connection.host}:${dbConnection.connection.port}/${dbConnection.connection.name}`);
     } catch (error) {
         console.log("Connection error:", error.message)
-        throw new ApiError("Failed to connect to database",500)
+        throw new ApiError("Failed to database connection",500)
     }
 };
 

@@ -9,8 +9,6 @@ export default async function handler(req, res) {
     connectDB().then();
     const fullUrl = req.url;
     const path = new URL(fullUrl, `https://${req.headers.host}`).pathname;
-    console.log("Users.js>>", fullUrl, path);
-
 
     if (req.method === 'GET') {
         try{

@@ -1,7 +1,7 @@
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-const auth = "/auth";
-const users = "/users";
+const auth = "/api/auth";
+const users = "/api/users";
 
 const urls = {
     auth: {

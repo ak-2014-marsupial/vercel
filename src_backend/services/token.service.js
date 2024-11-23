@@ -10,6 +10,7 @@ class TokenService {
     }
 
     checkToken(token, typeToken) {
+
         try {
             let secret;
             switch (typeToken) {
@@ -27,6 +28,8 @@ class TokenService {
             throw new ApiError("Token is not valid", 401)
         }
     }
+
+
 }
 
 export const tokenService = new TokenService();

@@ -4,7 +4,7 @@ import {tokenRepository} from "../repositories/token.repository";
 
 class AuthMiddleware {
 
-    async checkAccessToken(req, res) {
+    async checkAccessToken(req, res, params = {}) {
         try {
             const header = req.headers.authorization;
             if (!header) {
@@ -17,11 +17,37 @@ class AuthMiddleware {
             if (!pair) {
                 throw new ApiError("Token is not valid", 401)
             }
-            req.res.locals.tokenId = pair._id;
-            req.res.locals.jwtPayload = payload;
-            return true;
-        } catch (e) {
-            throw new ApiError("Token is not valid", 401)
+            params["tokenId"] = pair._id;
+            params["jwtPayload"] = payload;
+
+            return params;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async checkRefreshToken(req, res, params = {}) {
+        try {
+            const header = req.headers.authorization;
+            if (!header) {
+                throw new ApiError("Token is not provided", 401);
+            }
+            const refreshToken = header.split("Bearer ")[1];
+            const payload = tokenService.checkToken(
+                refreshToken,
+                "refresh",
+            );
+
+            const pair = await tokenRepository.findByParams({refreshToken});
+            if (!pair) {
+                throw new ApiError("Token is not valid", 401);
+            }
+            params["jwtPayload"] = payload;
+            params["oldTokensId"] = pair._id;
+            return params;
+
+        } catch (error) {
+            throw error;
         }
     }
 
