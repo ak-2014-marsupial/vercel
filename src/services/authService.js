@@ -1,41 +1,42 @@
-import {appConstants} from "../constants/appConstants";
 import {apiService} from "./apiService";
-import {urls} from "../constants/urlsConstants";
+import {appConstants} from "../constants/app.constants";
+import {urls} from "../constants/urls.constants";
+
 
 const authService = {
-    setTokens: ({accessToken, refreshToken}) => {
+    register(user) {
+        return apiService.post(urls.auth.signUp, user)
+    },
+    async login(user) {
+        const {data:{tokens}} = await apiService.post(urls.auth.signIn, user);
+        this.setTokens(tokens)
+        const {data: me} = await this.me();
+        return me
+    },
+    async refresh() {
+        const refreshToken = this.getRefreshToken();
+        const {data} = await apiService.post(urls.auth.refresh, {refreshToken});
+        this.setTokens(data)
+    },
+    me() {
+        return apiService.get(urls.auth.me)
+    },
+    setTokens({accessToken, refreshToken}) {
         localStorage.setItem(appConstants.accessTokenKey, accessToken)
         localStorage.setItem(appConstants.refreshTokenKey, refreshToken)
     },
-    signIn: async (user) => {
-        const {data} = await apiService.post(urls.auth.signIn, user);
-        this.setTokens(data)
-        const {data: me} = await this.me();
-        console.log(me);
+    getAccessToken() {
+        return localStorage.getItem(appConstants.accessTokenKey)
     },
-    refreshTokens: async () => {
-        const refreshToken = this.getRefreshToken();
-        const {data} = await apiService.post(urls.auth.refresh, {refreshToken});
-        this.setTokens(data);
+    getRefreshToken(){
+        return localStorage.getItem(appConstants.refreshTokenKey)
     },
-    getAccessToken: () => {
-        localStorage.getItem(appConstants.accessTokenKey)
-    },
-    getRefreshToken: () => {
-        localStorage.getItem(appConstants.refreshTokenKey)
-    },
-    deleteTokens: () => {
-        localStorage.removeItem(appConstants.accessTokenKey);
-        localStorage.removeItem(appConstants.refreshTokenKey);
-    },
-    signUp: (user) => {
-        console.log("urls.auth.signUp>>",urls.auth.signUp);
-        return apiService.post(urls.auth.signUp, user)
-    },
-    getMe: () => {
-        return apiService.get(urls.user.me)
+    deleteTokens(){
+        localStorage.removeItem(appConstants.accessTokenKey)
+        localStorage.removeItem(appConstants.refreshTokenKey)
     }
-
 }
 
-export {authService}
+export {
+    authService
+}

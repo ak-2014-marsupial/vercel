@@ -1,0 +1,40 @@
+.input_group {
+    position: relative;
+}
+
+
+.input {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    border-radius: calc(0.3 * var(--radius)) ;
+
+    border: 1px solid var(--border-color-dark);
+    visibility: initial;
+}
+
+.placeholder {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    padding: 0 5px;
+    color: var(--primary-color);
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+input:not(:placeholder-shown) + .placeholder, .input:focus + .placeholder {
+    outline: none;
+
+    top: -10px;
+    color: var(--border-color-dark);
+    background-color:var(--background-color);
+}
+.i{
+    position: absolute;
+    top: 25%;
+    right: 0.2rem;
+    cursor: pointer;
+    color:var(--primary-color);
+}
