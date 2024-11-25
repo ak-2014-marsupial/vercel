@@ -8,8 +8,6 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import css from "./Register.module.css"
 import {registerValidator} from "../../validators/register.validator";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
-import {InputComponent} from "../Input/Input.component";
-import {type} from "nodemon";
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();
