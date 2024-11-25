@@ -21,7 +21,7 @@ const InputComponent = ({
         if (!errors || !errors[registerField]) {
             return null;
         } else {
-            return <span style={{color: 'red', fontSize: "10px"}}>{errors[registerField].message}</span>
+            return <span className={css.error}>{errors[registerField].message}</span>
         }
     }
 
@@ -35,8 +35,9 @@ const InputComponent = ({
                 />
                 <label className={css.placeholder}>{name}</label>
                 {type === "password" ? renderIcon() : null}
+                {renderError()}
             </div>
-            {renderError()}
+
         </>
 
     )

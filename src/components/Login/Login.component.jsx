@@ -19,6 +19,7 @@ const LoginComponent = () => {
     const {
         register,
         handleSubmit
+
     } = useForm(initDataForm);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +30,6 @@ const LoginComponent = () => {
             navigate('/inventory')
         }
     };
-
     return (
         <div     className={css.form_wrapper}>
             {loginError && <h5>{loginError}</h5>}

@@ -38,3 +38,17 @@ input:not(:placeholder-shown) + .placeholder, .input:focus + .placeholder {
     cursor: pointer;
     color:var(--primary-color);
 }
+
+.error{
+    font-size: 0.7rem;
+    color:var(--error-color);
+    padding: 0.1rem;
+    width: 120%;
+    position: absolute;
+    top:70%;
+    right: 0;
+    background-color: var(--border-color);
+    border-radius: calc(0.3 * var(--radius));
+    z-index: 5;
+    /*border:1px solid red*/
+}

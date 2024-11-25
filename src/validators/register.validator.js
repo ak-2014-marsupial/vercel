@@ -1,5 +1,6 @@
 import Joi from "joi";
 import {regexConstant} from "../constants/regex.constants";
+import joi from "joi";
 
 const registerValidator = Joi.object({
     name: Joi.string()
@@ -14,7 +15,13 @@ const registerValidator = Joi.object({
     re_password: Joi.any()
         .equal(Joi.ref('password'))
         .required()
-        .messages({'any.only': 'passwords does not match'})
+        .messages({'any.only': 'passwords does not match'}),
+
+    email:Joi.string()
+        .pattern(regexConstant.email)
+        .messages({'string.pattern.base':"email not allowed"}),
+
+    age:joi.number().min(15).max(80),
 })
 
 export {registerValidator}
