@@ -10,7 +10,7 @@ const connectDB = async () => {
 
         // console.log(`2.MongoDB connected:${dbConnection.connection.host}:${dbConnection.connection.port}/${dbConnection.connection.name}`);
     } catch (error) {
-        console.log("Connection error:", error.message)
+        console.log("Connection error:",process.env.DB_URL," >>> ", error.message)
         throw new ApiError("Failed to database connection",500)
     }
 };
