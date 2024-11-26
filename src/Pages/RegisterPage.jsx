@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {RegisterComponent} from "../components/Register/Register.component";
 
 const RegisterPage = () => {

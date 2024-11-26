@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isFulfilled, isRejected} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {authService} from "../../services/authService";
 
 
