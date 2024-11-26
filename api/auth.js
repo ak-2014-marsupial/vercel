@@ -5,7 +5,7 @@ import {getHandler} from "../src_backend/routes";
 export default async function handler(req, res) {
     // handlerCORS(req, res);
 
-    res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000'); // Allow all origins
+    res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000/'); // Allow all origins
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // Allowed methods
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allowed headers
 
