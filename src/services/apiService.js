@@ -1,9 +1,9 @@
 import axios from "axios";
-import {baseURL, urls} from "../constants/urls.constants";
+import { urls} from "../constants/urls.constants";
 import {authService} from "./authService";
 import {router} from "../router";
 
-
+const baseURL="https://test-three-sage-59.vercel.app"
 
 let isRefreshing = false
 const waitList = []

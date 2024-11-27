@@ -17,9 +17,12 @@ code {
 input:focus{
     outline: none;
 }
+.container{
+    height: 100%;
+}
 
 form {
-    margin-top: 1rem;
+    /*margin-top: 1rem;*/
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

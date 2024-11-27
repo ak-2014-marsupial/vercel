@@ -31,10 +31,10 @@ const LoginComponent = () => {
         }
     };
     return (
-        <div     className={css.form_wrapper}>
+        <div className={css.form_wrapper}>
             {loginError && <h5>{loginError}</h5>}
-            <form  onSubmit={handleSubmit(login)}>
-                <InputComponent type="text" name="email" registerField="email" register={register} />
+            <form onSubmit={handleSubmit(login)}>
+                <InputComponent type="text" name="email" registerField="email" register={register}/>
                 <InputComponent type="password" name="password" registerField="password" register={register}/>
                 <button>login</button>
             </form>

@@ -6,7 +6,7 @@ import LoaderComponent from "../components/Loader/Loader.component";
 const MainLayout = () => {
 
     return (
-        <div>
+        <div className="container">
             <Header/>
              <LoaderComponent/>
             <Outlet/>
