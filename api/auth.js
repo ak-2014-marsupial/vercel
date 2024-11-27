@@ -1,20 +1,14 @@
 import connectDB from "../src_backend/configs/connectionDB";
 import {getHandler} from "../src_backend/routes";
+import {handlerCORS} from "../src_backend/handlers/cors.handler";
 
 export default async function handler(req, res) {
-    // handlerCORS(req, res);
-    const origin = req.headers.origin;
-
-    console.log('Request Origin:', origin);
-    res.setHeader('Access-Control-Allow-Origin', 'https://ann-227.github.io');
-    // res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,DELETE, OPTIONS'); // Allowed methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allowed headers
+    handlerCORS(req, res);
 
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
-        res.status(200).end(); // Respond to preflight requests
-        console.log('CORS preflight response sent with status 200');
+        res.status(200).end();
+        // console.log('CORS preflight response sent with status 200');
         return;
     }
 

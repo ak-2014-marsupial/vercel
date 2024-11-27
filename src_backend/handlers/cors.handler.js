@@ -1,11 +1,15 @@
 export const handlerCORS = (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Разрешить все источники
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Разрешенные методы
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Разрешенные заголовки
+    const origin = req.headers.origin;
+    const allowedOrigins = process.env?.ALLOWED_ORIGINS?.split(",") || [];
 
-    if (req.method === 'OPTIONS') {
-        // preflight-query
-        res.status(200).end();
-        return;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '');
     }
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
 }
+
