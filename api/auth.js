@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     console.log('Request Origin:', origin);
     res.setHeader('Access-Control-Allow-Origin', 'https://ann-227.github.io');
-    res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,DELETE, OPTIONS'); // Allowed methods
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allowed headers
 
