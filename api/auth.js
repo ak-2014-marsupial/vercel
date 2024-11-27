@@ -7,18 +7,18 @@ export default async function handler(req, res) {
 
     console.log('Request Origin:', origin);
     res.setHeader('Access-Control-Allow-Origin', 'https://ann-227.github.io');
-    res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000'); // Allow all origins
+    // res.setHeader('Access-Control-Allow-Origin',  'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,DELETE, OPTIONS'); // Allowed methods
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allowed headers
 
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
         res.status(200).end(); // Respond to preflight requests
+        console.log('CORS preflight response sent with status 200');
         return;
     }
 
     connectDB().then();
-    console.log("REQ origin:",req.headers.origin);
 
     const fullUrl = req.url;
     const method = req.method;
