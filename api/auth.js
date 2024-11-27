@@ -3,7 +3,7 @@ import {getHandler} from "../src_backend/routes";
 
 export default async function handler(req, res) {
 
-
+    const origin = req.headers.origin;
     console.log('Request Origin:', origin);
     res.setHeader('Access-Control-Allow-Origin', 'https://ann-227.github.io');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,DELETE, OPTIONS');
