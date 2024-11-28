@@ -16,6 +16,8 @@ const routes = {
     GET: {
         "/api/auth/me": mainHandler(authMiddleware.checkAccessToken, userController.getMe),
         "/api/auth/users": mainHandler(userController.getAll),
+        "/api/auth/google": mainHandler(userController.googleSignIn),
+        "/api/auth/google/callback": mainHandler(userController.googleCallBack),
         "/api/auth/:userId": userController.getById,
     },
     DELETE: {

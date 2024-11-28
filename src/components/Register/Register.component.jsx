@@ -6,6 +6,7 @@ import {authActions} from "../../redux/slices/auth.slice";
 import {joiResolver} from "@hookform/resolvers/joi";
 
 import css from "./Register.module.css"
+import {FcGoogle} from "react-icons/fc";
 import {registerValidator} from "../../validators/register.validator";
 import {InputComponent} from "../Input/Input.component";
 import {GoogleLogin} from "@react-oauth/google";
@@ -37,10 +38,15 @@ const RegisterComponent = () => {
             navigate('/login')
         }
     };
-
+    const handleGoogleSignIn = () => {
+        console.log("handleGoogleSignIn");
+        dispatch(authActions.googleAuth());
+    }
 
     return (
         <div className={css.form_wrapper}>
+            <button onClick={handleGoogleSignIn}>Google sign In <i><FcGoogle/></i></button>
+
             <GoogleLogin onSuccess={(credentialsResponse) => console.log(jwtDecode(credentialsResponse.credential))}
                          onError={() => console.log("Login failed")}/>
 

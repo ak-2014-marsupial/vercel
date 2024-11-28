@@ -20,6 +20,17 @@ const register = createAsyncThunk(
         }
 )
 
+const googleAuth = createAsyncThunk(
+    'authSlice/register',
+    async (_ , {rejectWithValue}) => {
+        try {
+            await authService.googleAuth()
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
 const login = createAsyncThunk(
     'authSlice/login',
         async ({user}, {rejectWithValue}) => {
@@ -50,16 +61,21 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addCase(register.rejected, state => {
-                state.registerError = 'Username already exist'
-            })
-            .addCase(login.rejected, state => {
-                state.loginError = 'Wrong username or password'
-            })
             .addCase(me.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addMatcher(isFulfilled(register, login), state => {
+            .addCase(googleAuth.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(register.rejected, (state,action) => {
+                console.log(action.payload);
+                state.registerError = action.payload?.message || 'Username already exist'
+            })
+            .addCase(login.rejected, (state,action) => {
+                state.loginError = action.payload?.message ||'Wrong username or password'
+            })
+
+            .addMatcher(isFulfilled(register, login, googleAuth), state => {
                 state.registerError = null
                 state.loginError = null
             })
@@ -71,6 +87,7 @@ const {reducer: authReducer, actions} = authSlice;
 const authActions = {
     ...actions,
     register,
+    googleAuth,
     login,
     me
 }

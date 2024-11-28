@@ -7,6 +7,10 @@ const authService = {
     register(user) {
         return apiService.post(urls.auth.signUp, user)
     },
+    googleAuth(){
+        console.log("authService:",urls,urls.auth.google);
+        return apiService.get(urls.auth.google)
+    },
     async login(user) {
         const {data:{tokens}} = await apiService.post(urls.auth.signIn, user);
         this.setTokens(tokens)

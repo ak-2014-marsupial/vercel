@@ -1,12 +1,12 @@
 import connectDB from "../src_backend/configs/connectionDB";
 import {getHandler} from "../src_backend/routes";
+import {configs} from "../src_backend/configs/config";
 
 export default async function handler(req, res) {
 
     const origin = req.headers.origin;
-    const allowedOrigins = process.env?.ALLOWED_ORIGINS?.split(",") || []
-    console.log({origin, allowedOrigins});
-    if(allowedOrigins.includes(origin)){
+    console.log("auth.js",{origin, allowedOrigins:configs.ALLOWED_ORIGINS});
+    if(configs.ALLOWED_ORIGINS.includes(origin)){
         res.setHeader('Access-Control-Allow-Origin', origin);
     } else{
         res.setHeader('Access-Control-Allow-Origin', "");
