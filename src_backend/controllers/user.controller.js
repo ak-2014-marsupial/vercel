@@ -79,6 +79,7 @@ class UserController {
     }
 
     async googleCallBack(req, res) {
+        console.log("user/controller googleCallBack");
         try {
         await googleAuth.initialize();
         passport.authenticate('google', {
