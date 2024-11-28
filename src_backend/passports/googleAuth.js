@@ -13,7 +13,6 @@ class GoogleAuth {
             throw new ApiError("Google authentication failed",500)
         }
         const callbackURL =`${configs.BACK_END_HOST}/auth/google/callback`;
-        console.log("GoogleAuth:",{host:configs.BACK_END_HOST, secret:configs.GOOGLE_CLIENT_SECRET});
         passport.use(
             new GoogleStrategy(
                 {
@@ -46,7 +45,7 @@ class GoogleAuth {
         const user = await User.findOne({ email: profile["emails"][0].value });
         return done(null, user);
         */
-        console.log("googleAuth:  ",{
+        console.log("Passports/googleAuth:  ",{
             email: profile["emails"][0].value,
             fullName: profile["displayName"],
             avatar: profile["photos"][0].value,

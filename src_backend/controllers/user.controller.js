@@ -15,7 +15,6 @@ class UserController {
     }
 
     async getById(req, res, params) {
-        console.log("user controller: ", params);
         try {
             const userId = params.userId;
             const result = await userService.getById(userId);
@@ -63,7 +62,7 @@ class UserController {
     }
 
     async googleSignIn(req, res) {
-        console.log("googleSignIn>> ","googleSignIn");
+
         try {
             await googleAuth.initialize();
             passport.authenticate('google', {
