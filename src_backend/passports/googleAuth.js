@@ -12,7 +12,8 @@ class GoogleAuth {
         if(!configs.BACK_END_HOST){
             throw new ApiError("Google authentication failed",500)
         }
-        const callbackURL =`${configs.BACK_END_HOST}/auth/google/callback`
+        const callbackURL =`${configs.BACK_END_HOST}/auth/google/callback`;
+        console.log("GoogleAuth:",{host:configs.BACK_END_HOST, secret:configs.GOOGLE_CLIENT_SECRET});
         passport.use(
             new GoogleStrategy(
                 {

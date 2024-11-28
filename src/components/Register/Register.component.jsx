@@ -9,8 +9,6 @@ import css from "./Register.module.css"
 import {FcGoogle} from "react-icons/fc";
 import {registerValidator} from "../../validators/register.validator";
 import {InputComponent} from "../Input/Input.component";
-import {GoogleLogin} from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();
@@ -46,9 +44,6 @@ const RegisterComponent = () => {
     return (
         <div className={css.form_wrapper}>
             <button onClick={handleGoogleSignIn}>Google sign In <i><FcGoogle/></i></button>
-
-            <GoogleLogin onSuccess={(credentialsResponse) => console.log(jwtDecode(credentialsResponse.credential))}
-                         onError={() => console.log("Login failed")}/>
 
             {registerError && <h5>{registerError}</h5>}
             <form onSubmit={handleSubmit(registerUser)}>
