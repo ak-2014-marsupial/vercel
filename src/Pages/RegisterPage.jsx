@@ -1,5 +1,5 @@
 import React from 'react';
-import {RegisterComponent} from "../components/Register/Register.component";
+import {RegisterComponent} from "../features/auth/Register/Register.component";
 
 const RegisterPage = () => {
         return (

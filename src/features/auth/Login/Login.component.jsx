@@ -2,10 +2,10 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {authActions} from "../../redux/slices/auth.slice";
+import {authActions} from "../auth.slice";
 
 import css from "./Login.module.css"
-import {InputComponent} from "../Input/Input.component";
+import {InputComponent} from "../../../components/Input/Input.component";
 
 const initDataForm = {
     defaultValues: {

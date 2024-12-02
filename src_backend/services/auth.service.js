@@ -27,8 +27,8 @@ class AuthService {
     async googleAuth(dto) {
         let user = await userRepository.getByParams({email: dto.email});
         if (!user) {
-            // user = await userRepository.create({...dto, name: `${dto.given_name} ${dto.family_name}`});
-            user = await userRepository.create(dto);
+            // user = await userRepository.create(dto);
+            user = await userRepository.create({...dto, name: `${dto.given_name} ${dto.family_name}`});
         } else {
             user = await userRepository.updateById(user._id, dto);
         }

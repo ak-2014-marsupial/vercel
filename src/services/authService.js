@@ -7,14 +7,16 @@ const authService = {
     register(user) {
         return apiService.post(urls.auth.signUp, user)
     },
-    registerWithGoogle(credentialResponse){
-        return apiService.post(urls.auth.signInWithGoogle, credentialResponse)
+    async registerWithGoogle(credentialResponse){
+        const {data:{user,tokens}}= await apiService.post(urls.auth.signInWithGoogle, credentialResponse);
+        this.setTokens(tokens);
+        return user;
     },
     async login(user) {
         const {data:{tokens}} = await apiService.post(urls.auth.signIn, user);
         this.setTokens(tokens)
         const {data: me} = await this.me();
-        return me
+        return me;
     },
     async refresh() {
         const refreshToken = this.getRefreshToken();
@@ -25,6 +27,8 @@ const authService = {
         return apiService.get(urls.auth.me)
     },
     setTokens({accessToken, refreshToken}) {
+
+        console.log({accessToken, refreshToken})
         localStorage.setItem(appConstants.accessTokenKey, accessToken)
         localStorage.setItem(appConstants.refreshTokenKey, refreshToken)
     },
