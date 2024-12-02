@@ -24,6 +24,20 @@ class AuthService {
         return {user, tokens}
     }
 
+    async googleAuth(dto) {
+        let user = await userRepository.getByParams({email: dto.email});
+        if (!user) {
+            // user = await userRepository.create({...dto, name: `${dto.given_name} ${dto.family_name}`});
+            user = await userRepository.create(dto);
+        } else {
+            user = await userRepository.updateById(user._id, dto);
+        }
+        const tokens = await tokenService.generatePair({userId: user._id, role: user.role});
+        await tokenRepository.create({...tokens, _userId: user._id});
+        return {user, tokens}
+
+    }
+
     async refreshTokens(payload, oldTokenId) {
         const tokens = await tokenService.generatePair({
             userId: payload.userId,
@@ -33,12 +47,13 @@ class AuthService {
         await tokenRepository.deleteById(oldTokenId);
         return tokens;
     }
-     async logout(payload, tokenId){
+
+    async logout(payload, tokenId) {
         await tokenRepository.deleteById(tokenId);
     }
 
-     async logoutAll(payload) {
-        await tokenRepository.deleteByParams({ _userId: payload.userId });
+    async logoutAll(payload) {
+        await tokenRepository.deleteByParams({_userId: payload.userId});
     }
 }
 

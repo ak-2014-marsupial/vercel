@@ -1,8 +1,6 @@
 import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {authService} from "../../services/authService";
 
-
-
 const initialState = {
     registerError: null,
     loginError: null,
@@ -20,11 +18,13 @@ const register = createAsyncThunk(
         }
 )
 
-const googleAuth = createAsyncThunk(
-    'authSlice/register',
-    async (_ , {rejectWithValue}) => {
+const signInWithGoogle = createAsyncThunk(
+    'authSlice/signInWithGoogle',
+    async ({credentialResponse}, {rejectWithValue}) => {
         try {
-            await authService.googleAuth()
+           const {data}= await authService.registerWithGoogle(credentialResponse);
+
+            return data;
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
@@ -61,21 +61,19 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
+            .addCase(signInWithGoogle.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(register.rejected, state => {
+                state.registerError = 'Username already exist'
+            })
+            .addCase(login.rejected, state => {
+                state.loginError = 'Wrong username or password'
+            })
             .addCase(me.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addCase(googleAuth.fulfilled, (state, action) => {
-                console.log(action.payload);
-            })
-            .addCase(register.rejected, (state,action) => {
-                console.log(action.payload);
-                state.registerError = action.payload?.message || 'Username already exist'
-            })
-            .addCase(login.rejected, (state,action) => {
-                state.loginError = action.payload?.message ||'Wrong username or password'
-            })
-
-            .addMatcher(isFulfilled(register, login, googleAuth), state => {
+            .addMatcher(isFulfilled(register, login,signInWithGoogle), state => {
                 state.registerError = null
                 state.loginError = null
             })
@@ -87,8 +85,8 @@ const {reducer: authReducer, actions} = authSlice;
 const authActions = {
     ...actions,
     register,
-    googleAuth,
     login,
+    signInWithGoogle,
     me
 }
 

@@ -1,5 +1,5 @@
 const baseURL = process.env.REACT_APP_API_URL;
-// const baseURL="https://test-three-sage-59.vercel.app/api"
+// const baseURL="https://test-three-sage-59.vercel.app"
 const auth = "/auth";
 const users = "/users";
 
@@ -8,7 +8,7 @@ const urls = {
         signIn: `${auth}/sign-in`,
         signUp: `${auth}/sign-up`,
         refresh: `${auth}/refresh`,
-        google:`${auth}/google`,
+        signInWithGoogle:`${auth}/sign-in/google`,
         me:`${auth}/me`
     },
     user:{

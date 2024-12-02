@@ -1,0 +1,28 @@
+// import jwt from "jsonwebtoken";
+
+const jwt=require("jsonwebtoken");
+const jwkToPem = require("jwk-to-pem")
+
+const key= {
+    kty: 'RSA',
+    e: 'AQAB',
+    use: 'sig',
+    n: 'vHJNSdOKUAG53oCGHbEp2PJFX-NksFDrw1_TEzK8yF72Jbp8cYebwkoZpCkr2THVAmRuvDe8GuuXYyRih9w7APwAH0aNy8og4Q1rqPuX-q1TAqO9KXYJNd2VIaICwY2IvY3IgQNu0r9GKouSBeeaXGBlUYi2IR74T4ICOwcpJYTQOE2GWcWeri7iaeFzMfqKa0NJrv6f7paGA0DNu0PggNpgOQMbZoriWc7-PGa7lP4QrStpGikgNOcbGfEw53LeB6dbw72uCCpGbd1iuhzv6M6B-7gLQEp4188mAgjSkmr4TruyZ36Nn4gK_FTOFI44QNMvAGUBJ1L7M49V0KyELQ',
+    kid: '3628258601113e6576a45337365fe8b8973d1671',
+    alg: 'RS256'
+}
+const  secret="902755161610-7gulj610mc6ue2rsic9kaq68l80he2ce.apps.googleusercontent.com";
+
+const token= {
+    credential: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjM2MjgyNTg2MDExMTNlNjU3NmE0NTMzNzM2NWZlOGI4OTczZDE2NzEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI5MDI3NTUxNjE2MTAtN2d1bGo2MTBtYzZ1ZTJyc2ljOWthcTY4bDgwaGUyY2UuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI5MDI3NTUxNjE2MTAtN2d1bGo2MTBtYzZ1ZTJyc2ljOWthcTY4bDgwaGUyY2UuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDQ5MjIyMDEzNTczMzIwMjI4MjYiLCJlbWFpbCI6ImFrMzY3OTRjYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzMyOTAxNDI5LCJuYW1lIjoiQW5kcmV3IEtydXRveSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NJV2hPdEY4dzRkcTd6Yk9CZzM4SkJQelhWU3NaOENQNDExU2x2RDhpWGw4VWc4aGc9czk2LWMiLCJnaXZlbl9uYW1lIjoiQW5kcmV3IiwiZmFtaWx5X25hbWUiOiJLcnV0b3kiLCJpYXQiOjE3MzI5MDE3MjksImV4cCI6MTczMjkwNTMyOSwianRpIjoiZjdkNjEzZDMwNmRiMDZkZDRmNzBiMTJhNjllYzYwZjUyMThiZWI1ZSJ9.snOHAj9PDoD7SGC-jGM1XSOgGX9BbRU4PkMg3ubGfiDXz6K-gNLuaCkeCMBwpH7bbgAEEGldbCp2QqilfN0XAH__NE1f7Ll99rTvJI-V4IZcbVPYKyi97y5mdvQ1hj3a0sQrAZGsjnWgQ5XcfEsFGtGIIPWfJ-6c64Niyp8mDt9vHaPaea0wQ_kGuSebwlc0fXrwibcfeHTL0ngnKbxkEeIFtY6aFr0go25NZ9lvM3KlGxmfjNua01xFZ_BjdiK5JmWuJ87j8kNJVMUo0Spk4N-gmYbKk8ccudlSrbsHBMLy2Ac4LxuV2fad5zb2knPQubxvZzgBX2pJp_Y0Wv3wpg',
+        clientId: '902755161610-7gulj610mc6ue2rsic9kaq68l80he2ce.apps.googleusercontent.com',
+        select_by: 'btn'
+}
+
+const pemKey = jwkToPem(key)
+
+const verifiedToken = jwt.verify(token.credential, pemKey, {
+    algorithms: ['RS256'],
+    audience: secret,
+});
+console.log(verifiedToken);

@@ -1,5 +1,9 @@
 import {ApiError} from "../errors/api.error";
 import {authService} from "../services/auth.service";
+import {userRepository} from "../repositories/user.repository";
+import {tokenService} from "../services/token.service";
+import {tokenRepository} from "../repositories/token.repository";
+
 
 class AuthController {
     async signUp(req, res, params = {}) {
@@ -25,8 +29,18 @@ class AuthController {
         }
     }
 
+    async signInWithGoogle(req, res, params = {}) {
+        const result = await authService.googleAuth(params);
+        res.status(201).json(result);
+        try {
+        } catch (error) {
+            throw new ApiError(`${error.message}`, 401);
+        }
+
+    }
+
     async refresh(req, res, params = {}) {
-        console.log("authController >>",params);
+        console.log("authController >>", params);
         try {
             const jwtPayload = params.jwtPayload;
             const oldTokensId = params.oldTokensId;
