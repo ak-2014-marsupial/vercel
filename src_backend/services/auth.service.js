@@ -6,6 +6,13 @@ import {passwordService} from "./password.service";
 
 class AuthService {
     async signUp(dto) {
+        const existUser = await userRepository.getByParams({email: dto.email});
+        if (existUser) {
+            const provider = existUser.provider;
+            if (provider !== "email/password") {
+                throw new ApiError(`Пользователь с таким email уже зарегистрирован. Якщо бажаєте додати пароль або змінити свої дані, спочатку ввійдіть в додаток за допамогою ${provider}`, 401)
+            } else throw new ApiError("Invalid credentials", 401);
+        }
         const password = await passwordService.hashPassword(dto.password);
         const user = await userRepository.create({...dto, password});
 
@@ -28,7 +35,12 @@ class AuthService {
         let user = await userRepository.getByParams({email: dto.email});
         if (!user) {
             // user = await userRepository.create(dto);
-            user = await userRepository.create({...dto, name: `${dto.given_name} ${dto.family_name}`});
+            user = await userRepository.create({
+                ...dto,
+                name: `${dto.given_name} ${dto.family_name}`,
+                provider: "google",
+                isVerified: true
+            });
         } else {
             user = await userRepository.updateById(user._id, dto);
         }

@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 import React from "react";
 import {privateRoutes} from "../../config/privateRouter.config";
 
@@ -24,12 +24,22 @@ const getAllowedRoutes = (roles) => {
 const isArrayWithLength = (arr) => {
     return Boolean(Array.isArray(arr) && arr.length);
 }
+const renderRoutes = (routes) => {
+    return routes.map((item) => {
+        const {component: Component, path, children} = item;
+        return (<Route key={path} path={path} element={<Component/>}>
+            {children ? renderRoutes(children) : null}
+        </Route>)
+    });
+}
 
-const renderPrivateRoutes = (userRoles) => {
+const renderPrivateRoutes = (userRoles, isUserAuth) => {
+    if (!isUserAuth) {
+        return (<Route  path="*" element={<Navigate to="/login" replace />}/>)
+    }
     const allowedRoutes = getAllowedRoutes(userRoles);
-    return allowedRoutes.map(({component: Component, path}) => (
-        <Route key={path} path={path} element={<Component/>}/>
-    ));
+    return renderRoutes(allowedRoutes)
+
 }
 
 export {

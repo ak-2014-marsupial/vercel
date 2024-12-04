@@ -11,7 +11,7 @@ const register = createAsyncThunk(
     'authSlice/register',
         async ({user}, {rejectWithValue}) => {
             try {
-                await authService.register(user)
+               return await authService.register(user)
             } catch (error) {
                 return rejectWithValue(error.response.data)
             }
@@ -62,8 +62,8 @@ const authSlice = createSlice({
             .addCase(signInWithGoogle.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addCase(register.rejected, state => {
-                state.registerError = 'Username already exist'
+            .addCase(register.rejected, (state,action) => {
+                state.registerError = action.payload?.message || 'Username already exist'
             })
             .addCase(login.rejected, state => {
                 state.loginError = 'Wrong username or password'

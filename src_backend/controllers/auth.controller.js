@@ -1,9 +1,5 @@
 import {ApiError} from "../errors/api.error";
 import {authService} from "../services/auth.service";
-import {userRepository} from "../repositories/user.repository";
-import {tokenService} from "../services/token.service";
-import {tokenRepository} from "../repositories/token.repository";
-
 
 class AuthController {
     async signUp(req, res, params = {}) {

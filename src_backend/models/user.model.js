@@ -2,7 +2,15 @@ import mongoose from "mongoose";
 import {Schema} from "mongoose";
 
 const providers = ["email/password", "google"];
-const roles = ["user", "manager", "admin"];
+// const roles = ["user", "manager", "admin"];
+
+const roles= {
+    admin: {rate: 0, title: "admin"},
+    manager: {rate: 1, title: "manager"},
+    user: {rate: 3, tittle: "user"},
+    guest: {rate: 4, title: "guest"},
+}
+const roleList=Object.keys(roles)
 
 const userSchema = new Schema(
     {
@@ -16,10 +24,10 @@ const userSchema = new Schema(
         family_name: {type: String, required: false},
 
         role: {
-            type: String,
-            enum: roles,
+            type: [String],
+            enum: roleList,
             required: true,
-            default: roles[0],
+            default: roles.guest.title,
         },
         provider: {
             type: String,

@@ -8,7 +8,7 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import css from "./Register.module.css"
 import {registerValidator} from "../../../validators/register.validator";
 import {InputComponent} from "../../../components/Input/Input.component";
-import {GoogleLogin} from "@react-oauth/google";
+import {GoogleAuthButton} from "../GoogleAuthButton";
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();
@@ -36,21 +36,12 @@ const RegisterComponent = () => {
             navigate('/login')
         }
     };
-    const handleLoginSuccess = (credentialResponse) => {
-        console.log("Google handle Login Success");
-        dispatch(authActions.signInWithGoogle({credentialResponse}))
-    };
-    const handleLoginError = () => {
-        console.log('Login Failed');
-    };
 
     return (
         <div className={css.form_wrapper}>
-            <GoogleLogin onSuccess={handleLoginSuccess}
-                         onError={handleLoginError}/>
-
             {registerError && <h5>{registerError}</h5>}
             <form onSubmit={handleSubmit(registerUser)}>
+                <GoogleAuthButton/>
                 <InputComponent type="text" name="email" registerField="email"
                                 register={register} errors={errors}/>
                 <InputComponent type="password" name="password" registerField="password"
