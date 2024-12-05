@@ -7,22 +7,24 @@ import {RegisterPage} from "../Pages/RegisterPage";
 import {textConstants} from "../constants/text.constant";
 import {renderPrivateRoutes} from "./PrivateRouter/privateRouter.helper";
 import {useSelector} from "react-redux";
+import {HomePage} from "../Pages/Home";
+
 
 // const router = createHashRouter([
 const AppRouter = () => {
-    const {role} = useSelector(state => state.auth)
-
-    const userRoles = role || [];
-    const isUserAuth = true;
+    const {currentUser} = useSelector(state => state.auth)
+    const userRoles = currentUser?.role || [];
+    console.log(userRoles);
     return (
         <HashRouter>
             <Routes>
                 <Route path="/" element={<MainLayout/>}>
-                    <Route index element={<Navigate to="inventory"/>}/>
+                    <Route index element={<Navigate to="home"/>}/>
                     <Route path="about" element={<AboutPage/>}/>
+                    <Route path="home" element={<HomePage/>}/>
                     <Route path="login" element={<LoginPage/>}/>
                     <Route path="register" element={<RegisterPage/>}/>
-                    {renderPrivateRoutes(userRoles, isUserAuth)}
+                    {renderPrivateRoutes(userRoles)}
                     <Route path="*" element={<h1>NoPage</h1>}/>
 
                 </Route>

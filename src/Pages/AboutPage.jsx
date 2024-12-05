@@ -7,7 +7,6 @@ const AboutPage = () => {
         const response = await fetch(url);
         const json = await response.json();
         setResult(json)
-        console.log(json);
     }
     return (
         <div>

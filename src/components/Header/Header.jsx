@@ -1,14 +1,17 @@
 import React from 'react';
 
 import css from "./Header.module.css"
-import {NavBar} from "../NavBar/NavBar";
+import {NavbarComponent} from "../DropdownMenu/Navbar.component";
+import {UserInfoComponent} from "../UserInfo/UserInfo.component";
 
 const Header = () => {
     return (
-        <div className={css.header}>
-           <NavBar/>
-        </div>
+
+            <div className={css.header}>
+                <NavbarComponent/>
+                <UserInfoComponent/>
+            </div>
     );
 };
 
-export  {Header};
+export {Header};

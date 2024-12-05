@@ -10,8 +10,9 @@ const intersectionArrays = (...arrays) => {
         restArrays.every((arr) => arr.includes(item))
     ))
 };
-const getAllowedRoutes = (roles) => {
-    return privateRoutes.filter(({permission}) => {
+const getAllowedRoutes = (routes,roles) => {
+    // return privateRoutes.filter(({permission}) => {
+    return routes.filter(({permission}) => {
             if (!permission || !isArrayWithLength(permission)) {
                 return true;
             } else
@@ -33,17 +34,18 @@ const renderRoutes = (routes) => {
     });
 }
 
-const renderPrivateRoutes = (userRoles, isUserAuth) => {
-    if (!isUserAuth) {
-        return (<Route  path="*" element={<Navigate to="/login" replace />}/>)
+const renderPrivateRoutes = (userRoles) => {
+    if (userRoles.length === 0) {
+        return (<Route path="*" element={<Navigate to="/login" replace/>}/>)
     }
-    const allowedRoutes = getAllowedRoutes(userRoles);
+    const allowedRoutes = getAllowedRoutes(privateRoutes,userRoles);
     return renderRoutes(allowedRoutes)
 
 }
 
 export {
     renderPrivateRoutes,
+    getAllowedRoutes
 }
 
 

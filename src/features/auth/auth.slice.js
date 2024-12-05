@@ -1,21 +1,23 @@
 import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {authService} from "../../services/authService";
+import {appConstants} from "../../constants/app.constants";
 
 const initialState = {
     registerError: null,
     loginError: null,
-    currentUser: null
+    currentUser: JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null,
+    isAdditionallyStoredInLocalStorage: Boolean(localStorage.getItem(appConstants.localStorageKeyIsAdditionallyStoredInLocalStorage))
 };
 
 const register = createAsyncThunk(
     'authSlice/register',
-        async ({user}, {rejectWithValue}) => {
-            try {
-               return await authService.register(user)
-            } catch (error) {
-                return rejectWithValue(error.response.data)
-            }
+    async ({user}, {rejectWithValue}) => {
+        try {
+            return await authService.register(user)
+        } catch (error) {
+            return rejectWithValue(error.response.data)
         }
+    }
 )
 
 const signInWithGoogle = createAsyncThunk(
@@ -31,29 +33,40 @@ const signInWithGoogle = createAsyncThunk(
 
 const login = createAsyncThunk(
     'authSlice/login',
-        async ({user}, {rejectWithValue}) => {
-            try {
-                return await authService.login(user);
-            } catch (error) {
-                return rejectWithValue(error.response.data)
-            }
+    async ({user}, {rejectWithValue}) => {
+        try {
+            return await authService.login(user);
+        } catch (error) {
+            return rejectWithValue(error.response.data)
         }
+    }
 )
 const me = createAsyncThunk(
     'authSlice/me',
-        async (_, {rejectWithValue}) => {
-            try {
-                const {data} = await authService.me();
-                return data
-            } catch (error) {
-                return rejectWithValue(error.response.data)
-            }
+    async (_, {rejectWithValue}) => {
+        try {
+            const {data} = await authService.me();
+            return data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
         }
+    }
 )
 const authSlice = createSlice({
     name: 'authSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        logOut: (state, action) => {
+            state.currentUser = null;
+            localStorage.removeItem(appConstants.accessTokenKey)
+            localStorage.removeItem(appConstants.refreshTokenKey)
+        },
+
+        setAdditionallyStoredInLocalStorage: (state, action) => {
+            const value = Boolean(state.isAdditionallyStoredInLocalStorage);
+            state.isAdditionallyStoredInLocalStorage = !value
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(login.fulfilled, (state, action) => {
@@ -62,7 +75,7 @@ const authSlice = createSlice({
             .addCase(signInWithGoogle.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addCase(register.rejected, (state,action) => {
+            .addCase(register.rejected, (state, action) => {
                 state.registerError = action.payload?.message || 'Username already exist'
             })
             .addCase(login.rejected, state => {
@@ -71,7 +84,7 @@ const authSlice = createSlice({
             .addCase(me.fulfilled, (state, action) => {
                 state.currentUser = action.payload
             })
-            .addMatcher(isFulfilled(register, login,signInWithGoogle), state => {
+            .addMatcher(isFulfilled(register, login, signInWithGoogle), state => {
                 state.registerError = null
                 state.loginError = null
             })

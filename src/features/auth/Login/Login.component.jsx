@@ -26,10 +26,11 @@ const LoginComponent = () => {
     const navigate = useNavigate();
     const {loginError} = useSelector(state => state.auth);
     const login = async (user) => {
-        const {meta: {requestStatus}} = await dispatch(authActions.login({user}));
-        if (requestStatus === 'fulfilled') {
-            navigate('/inventory')
-        }
+        await dispatch(authActions.login({user}));
+        // const {meta: {requestStatus}} = await dispatch(authActions.login({user}));
+        // if (requestStatus === 'fulfilled') {
+        //     navigate('/inventory')
+        // }
     };
     return (
         <div className={css.form_wrapper}>

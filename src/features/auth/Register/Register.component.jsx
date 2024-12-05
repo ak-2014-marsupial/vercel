@@ -30,11 +30,11 @@ const RegisterComponent = () => {
     );
     const registerUser = async (user) => {
         delete user.re_password;
-        const {meta: {requestStatus}} = await dispatch(authActions.register({user}));
-
-        if (requestStatus === 'fulfilled') {
-            navigate('/login')
-        }
+        await dispatch(authActions.register({user}));
+        // const {meta: {requestStatus}} = await dispatch(authActions.register({user}));
+        // if (requestStatus === 'fulfilled') {
+        //     navigate('/login')
+        // }
     };
 
     return (
