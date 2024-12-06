@@ -26,6 +26,8 @@ store.subscribe(() => {
 
     if (isSaveInLS) {
         localStorage.setItem(appConstants.localStorageKeyCurrentUser, JSON.stringify(store.getState().auth.currentUser));
+    } else{
+        localStorage.removeItem(appConstants.localStorageKeyCurrentUser)
     }
 });
 

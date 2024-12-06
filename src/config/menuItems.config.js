@@ -16,12 +16,12 @@ const useItemsConfig = () => {
                     title: 'web development', children: [
                         {title: 'Frontend', cb: (mess) => console.log(mess), permission: ["admin", "manager"]},
                         {
-                            title: 'Backend', children: [
+                            title: 'Backend', permission: ["admin", "manager", "user"], children: [
                                 {title: 'NodeJS', cb: (mess) => console.log(mess), permission: ["admin", "manager"]},
                                 {
                                     title: 'PHP',
                                     cb: (mess) => console.log(mess),
-                                    permission: ["admin", "manager", "user"]
+
                                 },
                             ],
                         },

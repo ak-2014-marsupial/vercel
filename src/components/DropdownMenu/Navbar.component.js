@@ -12,8 +12,8 @@ const NavbarComponent = () => {
     const roles = currentUser?.role || [];
 
     const menuItemsConfig = useItemsConfig();
+    // const allowedRoutes = filterMenuItems(menuItemsConfig, roles)
     const allowedRoutes = getAllowedRoutes(menuItemsConfig, roles)
-    console.log(getAllowedRoutes(menuItemsConfig, roles));
     return (
         <nav className={css.nav_area}>
             <ul className={css.menus}>

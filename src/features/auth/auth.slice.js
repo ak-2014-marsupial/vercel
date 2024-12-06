@@ -56,15 +56,16 @@ const authSlice = createSlice({
     name: 'authSlice',
     initialState,
     reducers: {
-        logOut: (state, action) => {
+        logOut: (state) => {
             state.currentUser = null;
             localStorage.removeItem(appConstants.accessTokenKey)
             localStorage.removeItem(appConstants.refreshTokenKey)
         },
 
         setAdditionallyStoredInLocalStorage: (state, action) => {
-            const value = Boolean(state.isAdditionallyStoredInLocalStorage);
-            state.isAdditionallyStoredInLocalStorage = !value
+            // state.isAdditionallyStoredInLocalStorage = !Boolean(state.isAdditionallyStoredInLocalStorage);
+            //toggles the boolean value of isAdditionallyStoredInLocalStorage.
+            state.isAdditionallyStoredInLocalStorage ^= true;
         }
     },
     extraReducers: builder =>
