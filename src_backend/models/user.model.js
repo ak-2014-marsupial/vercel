@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import {Schema} from "mongoose";
+import {Role} from "./role.model";
 
 const providers = ["email/password", "google"];
 // const roles = ["user", "manager", "admin"];
@@ -29,6 +30,11 @@ const userSchema = new Schema(
             required: true,
             default: roles.guest.title,
         },
+        roles: [{
+            type: Schema.Types.ObjectId,
+            ref: "Role",
+            required: true,
+        }],
         provider: {
             type: String,
             enum: providers,
@@ -41,6 +47,15 @@ const userSchema = new Schema(
         timestamps: true,
         versionKey: false,
     }
-)
+);
+
+// Middleware to set default roles for a new user
+userSchema.pre('save', async function(next) {
+    if (this.isNew) {
+        const roles = await Role.find();
+        this.roles = roles[0]._id;
+    }
+    next();
+});
 
 export const User = mongoose.model("users", userSchema);

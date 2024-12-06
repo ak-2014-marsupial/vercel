@@ -5,7 +5,6 @@ export default async function handler(req, res) {
 
     const origin = req.headers.origin;
     const allowedOrigins = process.env?.ALLOWED_ORIGINS?.split(",") || []
-    console.log({origin, allowedOrigins});
     if(allowedOrigins.includes(origin)){
         res.setHeader('Access-Control-Allow-Origin', origin);
     } else{
