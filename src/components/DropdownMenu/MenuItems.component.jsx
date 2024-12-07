@@ -5,7 +5,8 @@ import {SlArrowDown, SlArrowUp, SlArrowLeft, SlArrowRight} from "react-icons/sl"
 import css from "./Dropdown.module.css"
 import {NavLink} from "react-router-dom";
 
-const MenuItemsComponent = ({items, depthLevel}) => {
+const MenuItemsComponent = (props) => {
+    const {items, depthLevel} = props;
     const [dropdown, setDropdown] = useState(false);
 
     let ref = useRef();
@@ -37,12 +38,12 @@ const MenuItemsComponent = ({items, depthLevel}) => {
         dropdown && setDropdown(false);
     };
 
-    const toggleDropdown = (e,items) => {
+    const toggleDropdown = (e, items) => {
         e.stopPropagation();
 
         setDropdown((prev) => !prev);
 
-        if(items.cb){
+        if (items.cb) {
             items.cb(items.title)
             console.log(items.title);
         }
@@ -50,9 +51,12 @@ const MenuItemsComponent = ({items, depthLevel}) => {
     }
 
     const renderButton = (items) => {
+        const {component:Component,props}=items
         let arrow, buttonTitle;
         if (items.path) {
             buttonTitle = <NavLink to={items.path}>{items.title}</NavLink>
+        } else if (items.component) {
+            buttonTitle = <><div>{items.title}</div><Component {...props}/></>
         } else buttonTitle = items.title;
 
         if (!items.children) {
@@ -63,7 +67,7 @@ const MenuItemsComponent = ({items, depthLevel}) => {
 
         return (
             <button className={css.btn} type="button" aria-haspopup="menu" aria-expanded={dropdown ? 'true' : 'false'}
-                    onClick={(e) => toggleDropdown(e,items)}
+                    onClick={(e) => toggleDropdown(e, items)}
             >
                 {buttonTitle}
                 <div className={css.icon}>{arrow}</div>

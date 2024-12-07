@@ -10,19 +10,17 @@ class AuthController {
 
             return null;
         } catch (error) {
-            throw new ApiError(`${error.message}`, 401)
+            throw new ApiError(`${error.message}`, error?.status || 401)
         }
     }
 
     async signIn(req, res, params = {}) {
-        try {
+
             const dto = req.body;
             const result = await authService.signIn(dto)
             res.status(201).json(result);
             return null;
-        } catch (error) {
-            throw new ApiError(`${error.message}`, 401);
-        }
+
     }
 
     async signInWithGoogle(req, res, params = {}) {
@@ -30,7 +28,7 @@ class AuthController {
         res.status(201).json(result);
         try {
         } catch (error) {
-            throw new ApiError(`${error.message}`, 401);
+            throw new ApiError(`${error.message}`, error?.status || 401);
         }
 
     }
@@ -44,7 +42,7 @@ class AuthController {
             res.status(201).json(result);
             return null;
         } catch (error) {
-            throw new ApiError(`${error.message}`, 400)
+            throw new ApiError(`${error.message}`, error?.status || 401)
         }
     }
 

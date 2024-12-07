@@ -1,9 +1,16 @@
 import {textConstants} from "../constants/text.constant";
 import {authActions} from "../features/auth/auth.slice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component";
+
+const useCheckedState = () => {
+    const result =Boolean(useSelector(state => state.auth.isAdditionallyStoredInLocalStorage))
+    return result;
+};
 
 const useItemsConfig = () => {
     const dispatch = useDispatch();
+    const isChecked = useCheckedState()
 
     const menuItemsConfig = [
         {title: textConstants.inventory, path: '/inventory', permission: ["admin", "manager"]},
@@ -43,7 +50,12 @@ const useItemsConfig = () => {
             title: textConstants.settings, children: [
                 {
                     title: "Save in LocalStorage",
-                    cb: (mess) => dispatch(authActions.setAdditionallyStoredInLocalStorage())
+                    component: CheckBoxComponent,
+                    props: {
+                        checked: isChecked,
+                        onChange: () => dispatch(authActions.setAdditionallyStoredInLocalStorage())
+                    },
+                    // cb: (mess) => dispatch(authActions.setAdditionallyStoredInLocalStorage())
                 },
                 {
                     title: 'Themes', children: [

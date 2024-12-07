@@ -2,27 +2,27 @@ import mongoose from "mongoose";
 import {Schema} from "mongoose";
 import {Role} from "./role.model";
 
-const providers = ["email/password", "google"];
-// const roles = ["user", "manager", "admin"];
+const providers = ["email/password", "google", "init"];
 
-const roles= {
+const roles = {
+    guest: {rate: 4, title: "guest"},
     admin: {rate: 0, title: "admin"},
     manager: {rate: 1, title: "manager"},
     user: {rate: 3, tittle: "user"},
-    guest: {rate: 4, title: "guest"},
 }
-const roleList=Object.keys(roles)
+
+const roleList = Object.keys(roles)
 
 const userSchema = new Schema(
     {
         name: {type: String, required: true},
-        age: {type: Number, required: false},
+        age: {type: Number},
         email: {type: String, required: true, unique: true},
-        phone: {type: String, required: false},
-        password: {type: String, required: false},
-        googleId: {type: String, required: false, unique: true},
-        given_name: {type: String, required: false},
-        family_name: {type: String, required: false},
+        phone: {type: String,},
+        password: {type: String},
+        googleId: {type: String},
+        given_name: {type: String},
+        family_name: {type: String},
 
         role: {
             type: [String],
@@ -31,10 +31,12 @@ const userSchema = new Schema(
             default: roles.guest.title,
         },
         roles: [{
-            type: Schema.Types.ObjectId,
-            ref: "Role",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Role',
             required: true,
         }],
+
+
         provider: {
             type: String,
             enum: providers,
@@ -49,13 +51,19 @@ const userSchema = new Schema(
     }
 );
 
-// Middleware to set default roles for a new user
-userSchema.pre('save', async function(next) {
-    if (this.isNew) {
-        const roles = await Role.find();
-        this.roles = roles[0]._id;
+// Pre-save hook to set default role
+userSchema.pre('save', async function (next) {
+    if (this.isNew && this.roles.length === 0) {
+        const defaultRole = await Role.findOne().sort({_id: 1}); // Get the first role
+        if (defaultRole) {
+            this.roles.push(defaultRole._id); // Add the default role to the roles array
+        }
     }
     next();
 });
+
+userSchema.statics.findWithRoles = async function (params) {
+    return await this.find(params).populate('roles');
+};
 
 export const User = mongoose.model("users", userSchema);

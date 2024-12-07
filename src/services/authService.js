@@ -13,9 +13,9 @@ const authService = {
         return user;
     },
     async login(user) {
-        const {data:{tokens}} = await apiService.post(urls.auth.signIn, user);
+        const {data:{user:me,tokens}} = await apiService.post(urls.auth.signIn, user);
         this.setTokens(tokens)
-        const {data: me} = await this.me();
+        // const {data: me} = await this.me();
         return me;
     },
     async refresh() {
@@ -27,8 +27,6 @@ const authService = {
         return apiService.get(urls.auth.me)
     },
     setTokens({accessToken, refreshToken}) {
-
-        console.log({accessToken, refreshToken})
         localStorage.setItem(appConstants.accessTokenKey, accessToken)
         localStorage.setItem(appConstants.refreshTokenKey, refreshToken)
     },

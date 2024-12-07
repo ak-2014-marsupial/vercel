@@ -7,12 +7,13 @@ const UserInfoComponent = () => {
     const currentUser = useSelector(state => state.auth.currentUser)
     if (!currentUser) return <div>NULL</div>
 
-    const {name, role} = currentUser;
+    const {name, role,roles} = currentUser;
+    console.log(roles[0]?.title);
 
     return (
         <div className={css.UserInfo}>
             <div>{name}</div>
-            <div>{role[0]}</div>
+            <div>{roles[0]?.title}</div>
         </div>
     );
 };

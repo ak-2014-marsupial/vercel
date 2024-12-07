@@ -65,6 +65,7 @@ const authSlice = createSlice({
         setAdditionallyStoredInLocalStorage: (state, action) => {
             // state.isAdditionallyStoredInLocalStorage = !Boolean(state.isAdditionallyStoredInLocalStorage);
             //toggles the boolean value of isAdditionallyStoredInLocalStorage.
+            console.log("press ChekBox");
             state.isAdditionallyStoredInLocalStorage ^= true;
         }
     },

@@ -1,4 +1,6 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
+
+const {Schema} = mongoose;
 
 const roleSchema = new Schema(
     {
@@ -19,8 +21,8 @@ roleSchema.statics.createDefaultRoles = async function () {
         {title: "manager", rate: 5},
         {title: "user", rate: 10}
     ];
-    const createdRoles = await this.insertMany(roles);
-    return createdRoles;
+    await this.insertMany(roles);
+
 };
 
-export const Role = mongoose.model("roles", roleSchema);
+export const Role = mongoose.model("Role", roleSchema);
