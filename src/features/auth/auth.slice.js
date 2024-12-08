@@ -6,7 +6,7 @@ const initialState = {
     registerError: null,
     loginError: null,
     currentUser: JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null,
-    isAdditionallyStoredInLocalStorage: Boolean(localStorage.getItem(appConstants.localStorageKeyIsAdditionallyStoredInLocalStorage))
+    isAdditionallyStoredInLocalStorage: Boolean(localStorage.getItem(appConstants.localStorageKeyIsSessionSave))
 };
 
 const register = createAsyncThunk(

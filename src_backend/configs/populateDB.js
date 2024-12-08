@@ -2,13 +2,15 @@ import {Initialization} from "../models/Initialization.model";
 import {Role} from "../models/role.model";
 import {User} from "../models/user.model";
 import {passwordService} from "../services/password.service";
+import {configs} from "./config";
 
-const defaultRoles = [
-    {title: 'guest', rate: 100},
-    {title: 'admin', rate: 0},
-    {title: 'manager', rate: 5},
-    {title: 'user', rate: 10}
-];
+// const defaultRoles = [
+//     {title: 'guest', rate: 100},
+//     {title: 'admin', rate: 0},
+//     {title: 'manager', rate: 5},
+//     {title: 'user', rate: 10}
+// ];
+const defaultRoles = JSON.parse(configs.DEFAULT_ROLES)
 
 const populateDB = async () => {
     try {
@@ -27,9 +29,9 @@ const populateDB = async () => {
         if (users.length === 0) {
             const roles = await Role.find(); // Fetch roles to assign to the super user
             const superUser = {
-                name: 'superuser',
-                email: "andrew_100@gmail.com",
-                password:await passwordService.hashPassword("A123456789$"),
+                name: configs.SUPER_USER_NAME,
+                email: configs.SUPER_USER_EMAIL,
+                password: await passwordService.hashPassword(configs.SUPER_USER_PASSWORD),
                 isVerified: true,
                 provider: "init",
                 roles: roles.map(role => role._id), // Assign all roles to the super user

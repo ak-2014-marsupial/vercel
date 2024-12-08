@@ -1,6 +1,7 @@
 import connectDB from "../src_backend/configs/connectionDB";
 import {getHandler} from "../src_backend/routes";
 import {populateDB} from "../src_backend/configs/populateDB";
+import {configs} from "../src_backend/configs/config";
 
 export default async function handler(req, res) {
 
@@ -24,7 +25,6 @@ export default async function handler(req, res) {
         // console.log('CORS preflight response sent with status 200');
         return;
     }
-
 
 
     const fullUrl = req.url;

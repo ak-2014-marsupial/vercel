@@ -8,7 +8,6 @@ const CheckBoxComponent = (props) => {
         checked ,
         onChange
     } = props;
-    console.log(onChange);
 
     return (
         <label className={css.wrapper}>

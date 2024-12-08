@@ -21,7 +21,7 @@ store.subscribe(() => {
     const isSaveInLS = store.getState().auth.isAdditionallyStoredInLocalStorage;
 
     console.log({isSaveInLS})
-    const key = appConstants.localStorageKeyIsAdditionallyStoredInLocalStorage;
+    const key = appConstants.localStorageKeyIsSessionSave;
     localStorage.setItem(key, JSON.stringify(store.getState().auth.isAdditionallyStoredInLocalStorage));
 
     if (isSaveInLS) {
