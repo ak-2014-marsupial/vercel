@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component";
 
 const useCheckedState = () => {
-    const result =Boolean(useSelector(state => state.auth.isAdditionallyStoredInLocalStorage))
+    const result =Boolean(useSelector(state => state.auth.isSessionSave))
     return result;
 };
 
@@ -53,9 +53,9 @@ const useItemsConfig = () => {
                     component: CheckBoxComponent,
                     props: {
                         checked: isChecked,
-                        onChange: () => dispatch(authActions.setAdditionallyStoredInLocalStorage())
+                        onChange: () => dispatch(authActions.setIsSessionSave())
                     },
-                    // cb: (mess) => dispatch(authActions.setAdditionallyStoredInLocalStorage())
+                    // cb: (mess) => dispatch(authActions.setIsSessionSave())
                 },
                 {
                     title: 'Themes', children: [

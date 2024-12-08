@@ -12,32 +12,16 @@ const renderRoutes = (routes) => {
 }
 
 const renderPrivateRoutes = (userRoles) => {
+    console.log(userRoles);
+
     if (userRoles.length === 0) {
         return (<Route path="*" element={<Navigate to="/login" replace/>}/>)
     }
     const allowedRoutes = getAllowedRoutes(privateRoutes, userRoles);
-    // const allowedRoutes = filterMenuItems(privateRoutes, userRoles);
     return renderRoutes(allowedRoutes)
 
 }
 
-const  filterMenuItems=(menuItems, roles)=> {
-    return menuItems.reduce((acc, item) => {
-        const hasPermission = item.permission ? item.permission.some(role => roles.includes(role)) : true;
-
-        if (hasPermission) {
-            const newItem = { ...item };
-            if (item.children) {
-                newItem.children = filterMenuItems(item.children, roles);
-                if (newItem.children.length === 0) {
-                    delete newItem.children; // Удаляем пустые children
-                }
-            }
-            acc.push(newItem);
-        }
-        return acc;
-    }, []);
-}
 
 const  getAllowedRoutes=(menuItems, roles)=> {
     return menuItems.reduce((acc, item) => {
@@ -46,7 +30,7 @@ const  getAllowedRoutes=(menuItems, roles)=> {
         if (hasPermission) {
             const newItem = { ...item };
             if (item.children) {
-                newItem.children = filterMenuItems(item.children, roles);
+                newItem.children = getAllowedRoutes(item.children, roles);
                 if (newItem.children.length === 0) {
                     delete newItem.children; // Удаляем пустые children
                 }
@@ -60,7 +44,6 @@ const  getAllowedRoutes=(menuItems, roles)=> {
 export {
     renderPrivateRoutes,
     getAllowedRoutes,
-    filterMenuItems
 }
 
 

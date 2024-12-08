@@ -8,12 +8,10 @@ import {getAllowedRoutes} from "../../routes/PrivateRouter/privateRouter.helper"
 import {useSelector} from "react-redux";
 
 const NavbarComponent = () => {
-    const currentUser = useSelector(state => state.auth.currentUser);
-    const roles = currentUser?.role || [];
+    const currentRole = useSelector(state => state.auth.currentRole);
 
     const menuItemsConfig = useItemsConfig();
-    // const allowedRoutes = filterMenuItems(menuItemsConfig, roles)
-    const allowedRoutes = getAllowedRoutes(menuItemsConfig, roles)
+    const allowedRoutes = getAllowedRoutes(menuItemsConfig, currentRole)
     return (
         <nav className={css.nav_area}>
             <ul className={css.menus}>

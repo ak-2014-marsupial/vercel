@@ -2,11 +2,20 @@ import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {authService} from "../../services/authService";
 import {appConstants} from "../../constants/app.constants";
 
+const currentUser = JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null;
+
+const setInitRole=(currentUser)=>{
+    if(!currentUser)return [];
+    return [currentUser.roles[0].title]
+}
+
 const initialState = {
     registerError: null,
     loginError: null,
-    currentUser: JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null,
-    isAdditionallyStoredInLocalStorage: Boolean(localStorage.getItem(appConstants.localStorageKeyIsSessionSave))
+    currentUser,
+    currentRole: setInitRole(currentUser),
+    isSessionSave: Boolean(localStorage.getItem(appConstants.localStorageKeyIsSessionSave)),
+
 };
 
 const register = createAsyncThunk(
@@ -58,24 +67,28 @@ const authSlice = createSlice({
     reducers: {
         logOut: (state) => {
             state.currentUser = null;
+            state.currentRole = [];
             localStorage.removeItem(appConstants.accessTokenKey)
             localStorage.removeItem(appConstants.refreshTokenKey)
         },
 
-        setAdditionallyStoredInLocalStorage: (state, action) => {
-            // state.isAdditionallyStoredInLocalStorage = !Boolean(state.isAdditionallyStoredInLocalStorage);
-            //toggles the boolean value of isAdditionallyStoredInLocalStorage.
-            console.log("press ChekBox");
-            state.isAdditionallyStoredInLocalStorage ^= true;
+        setIsSessionSave: (state, action) => {
+            // state.isSessionSave = !Boolean(state.isSessionSave);
+            //toggles the boolean value of isSessionSave.
+            console.log("press CheckBox");
+            state.isSessionSave ^= true;
         }
     },
     extraReducers: builder =>
         builder
             .addCase(login.fulfilled, (state, action) => {
-                state.currentUser = action.payload
+                state.currentUser = action.payload;
+                state.currentRole = action.payload.roles[0].title;
             })
             .addCase(signInWithGoogle.fulfilled, (state, action) => {
-                state.currentUser = action.payload
+                state.currentUser = action.payload;
+                state.currentRole = action.payload.roles[0].title;
+
             })
             .addCase(register.rejected, (state, action) => {
                 state.registerError = action.payload?.message || 'Username already exist'
@@ -84,7 +97,9 @@ const authSlice = createSlice({
                 state.loginError = 'Wrong username or password'
             })
             .addCase(me.fulfilled, (state, action) => {
-                state.currentUser = action.payload
+                state.currentUser = action.payload;
+                state.currentRole = action.payload.roles[0].title;
+
             })
             .addMatcher(isFulfilled(register, login, signInWithGoogle), state => {
                 state.registerError = null

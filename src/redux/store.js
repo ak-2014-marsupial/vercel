@@ -18,13 +18,12 @@ const store = configureStore({
 
 
 store.subscribe(() => {
-    const isSaveInLS = store.getState().auth.isAdditionallyStoredInLocalStorage;
+    const isSessionSave = store.getState().auth.isSessionSave;
 
-    console.log({isSaveInLS})
     const key = appConstants.localStorageKeyIsSessionSave;
-    localStorage.setItem(key, JSON.stringify(store.getState().auth.isAdditionallyStoredInLocalStorage));
+    localStorage.setItem(key, JSON.stringify(store.getState().auth.isSessionSave));
 
-    if (isSaveInLS) {
+    if (isSessionSave) {
         localStorage.setItem(appConstants.localStorageKeyCurrentUser, JSON.stringify(store.getState().auth.currentUser));
     } else{
         localStorage.removeItem(appConstants.localStorageKeyCurrentUser)
