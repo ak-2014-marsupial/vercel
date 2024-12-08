@@ -12,23 +12,20 @@ const renderRoutes = (routes) => {
 }
 
 const renderPrivateRoutes = (userRoles) => {
-    console.log(userRoles);
-
     if (userRoles.length === 0) {
         return (<Route path="*" element={<Navigate to="/login" replace/>}/>)
+    } else {
+        const allowedRoutes = getAllowedRoutes(privateRoutes, userRoles);
+        return renderRoutes(allowedRoutes)
     }
-    const allowedRoutes = getAllowedRoutes(privateRoutes, userRoles);
-    return renderRoutes(allowedRoutes)
-
 }
 
 
-const  getAllowedRoutes=(menuItems, roles)=> {
+const getAllowedRoutes = (menuItems, roles) => {
     return menuItems.reduce((acc, item) => {
-        const hasPermission = item.permission ? item.permission.some(role => roles.includes(role)) : true;
-
+            const hasPermission = item.permission ? item.permission.some(role => roles?.includes(role)) : true;
         if (hasPermission) {
-            const newItem = { ...item };
+            const newItem = {...item};
             if (item.children) {
                 newItem.children = getAllowedRoutes(item.children, roles);
                 if (newItem.children.length === 0) {

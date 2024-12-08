@@ -1,18 +1,21 @@
 import React from 'react';
 
 import css from "./UserInfo.module.css"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {DropDownComponent} from "../DropDown/DropDown.component";
+import {authActions} from "../../features/auth/auth.slice";
 
 const UserInfoComponent = () => {
-    const currentUser = useSelector(state => state.auth.currentUser)
+    const {currentUser, currentRole} = useSelector(state => state.auth);
+    const dispatch=useDispatch()
     if (!currentUser) return <div>NULL</div>
 
-    const {name,roles} = currentUser;
+    const {name, roles} = currentUser;
 
     return (
         <div className={css.UserInfo}>
             <div>{name}</div>
-            <div>{roles[0]?.title}</div>
+            <DropDownComponent items={roles} title={currentRole} cb={(item) => dispatch(authActions.setCurrentRole(item))}/>
         </div>
     );
 };

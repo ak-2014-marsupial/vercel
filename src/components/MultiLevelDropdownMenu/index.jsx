@@ -1,13 +1,13 @@
 import React from 'react';
 
-import css from "./Dropdown.module.css"
+import css from "./MultiLevelDropdown.module.css"
 import useItemsConfig from "../../config/menuItems.config";
 import {MenuItemsComponent} from "./MenuItems.component";
 
 import {getAllowedRoutes} from "../../routes/PrivateRouter/privateRouter.helper";
 import {useSelector} from "react-redux";
 
-const NavbarComponent = () => {
+const MultiLevelDropdownMenu = () => {
     const currentRole = useSelector(state => state.auth.currentRole);
 
     const menuItemsConfig = useItemsConfig();
@@ -26,4 +26,4 @@ const NavbarComponent = () => {
     );
 };
 
-export {NavbarComponent};
+export {MultiLevelDropdownMenu};

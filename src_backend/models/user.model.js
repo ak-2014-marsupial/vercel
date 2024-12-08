@@ -4,19 +4,10 @@ import {Role} from "./role.model";
 
 const providers = ["email/password", "google", "init"];
 
-const roles = {
-    guest: {rate: 4, title: "guest"},
-    admin: {rate: 0, title: "admin"},
-    manager: {rate: 1, title: "manager"},
-    user: {rate: 3, tittle: "user"},
-}
-
-const roleList = Object.keys(roles)
 
 const userSchema = new Schema(
     {
         name: {type: String, required: true},
-        age: {type: Number},
         email: {type: String, required: true, unique: true},
         phone: {type: String,},
         password: {type: String},
@@ -24,12 +15,6 @@ const userSchema = new Schema(
         given_name: {type: String},
         family_name: {type: String},
 
-        role: {
-            type: [String],
-            enum: roleList,
-            required: true,
-            default: roles.guest.title,
-        },
         roles: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Role',

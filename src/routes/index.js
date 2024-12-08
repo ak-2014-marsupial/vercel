@@ -13,6 +13,7 @@ import {HomePage} from "../Pages/Home";
 // const router = createHashRouter([
 const AppRouter = () => {
     const {currentRole} = useSelector(state => state.auth)
+    const currentRoles = currentRole? new Array(currentRole):[];
     return (
         <HashRouter>
             <Routes>
@@ -22,7 +23,7 @@ const AppRouter = () => {
                     <Route path="home" element={<HomePage/>}/>
                     <Route path="login" element={<LoginPage/>}/>
                     <Route path="register" element={<RegisterPage/>}/>
-                    {renderPrivateRoutes(currentRole)}
+                    {renderPrivateRoutes(currentRoles)}
                     <Route path="*" element={<h1>NoPage</h1>}/>
 
                 </Route>

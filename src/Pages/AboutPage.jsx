@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {DropDownComponent} from "../components/DropDown/DropDown.component";
 
 const AboutPage = () => {
     const [result, setResult] = useState("")
@@ -12,6 +13,7 @@ const AboutPage = () => {
         <div>
             <button onClick={fetchInfo}>fetch info from Vercel</button>
             <div>result:{result}</div>
+            <DropDownComponent/>
         </div>
     );
 };

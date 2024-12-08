@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {DropdownComponent} from "./Dropdown.component";
+import {MultiLevelDropdownMenuComponent} from "./MultiLevelDropdownMenu.component";
 
 import {SlArrowDown, SlArrowUp, SlArrowLeft, SlArrowRight} from "react-icons/sl";
-import css from "./Dropdown.module.css"
+import css from "./MultiLevelDropdown.module.css"
 import {NavLink} from "react-router-dom";
 
 const MenuItemsComponent = (props) => {
@@ -40,37 +40,35 @@ const MenuItemsComponent = (props) => {
 
     const toggleDropdown = (e, items) => {
         e.stopPropagation();
-
         setDropdown((prev) => !prev);
-
         if (items.cb) {
             items.cb(items.title)
-            console.log(items.title);
         }
-
     }
 
     const renderButton = (items) => {
-        const {component:Component,props}=items
+        const {component: Component, props} = items
         let arrow, buttonTitle;
         if (items.path) {
             buttonTitle = <NavLink to={items.path}>{items.title}</NavLink>
         } else if (items.component) {
-            buttonTitle = <><div>{items.title}</div><Component {...props}/></>
+            buttonTitle = <>
+                <div>{items.title}</div>
+                <Component {...props}/></>
         } else buttonTitle = items.title;
 
         if (!items.children) {
             arrow = null
         } else if (depthLevel === 0) {
-            arrow = dropdown ? <SlArrowUp/> : <SlArrowDown/>
-        } else arrow = dropdown ? <SlArrowLeft/> : <SlArrowRight/>
+            arrow = dropdown ? <SlArrowUp className={css.icon}/> : <SlArrowDown className={css.icon}/>
+        } else arrow = dropdown ? <SlArrowLeft className={css.icon}/> : <SlArrowRight className={css.icon}/>
 
         return (
             <button className={css.btn} type="button" aria-haspopup="menu" aria-expanded={dropdown ? 'true' : 'false'}
                     onClick={(e) => toggleDropdown(e, items)}
             >
                 {buttonTitle}
-                <div className={css.icon}>{arrow}</div>
+                {arrow}
             </button>
         )
     }
@@ -80,7 +78,7 @@ const MenuItemsComponent = (props) => {
             onMouseLeave={onMouseLeave} onClick={closeDropdown}
         >
             {renderButton(items)}
-            <DropdownComponent depthLevel={depthLevel} submenus={items.children} dropdown={dropdown}/>
+            <MultiLevelDropdownMenuComponent depthLevel={depthLevel} submenus={items.children} dropdown={dropdown}/>
         </li>
     );
 };

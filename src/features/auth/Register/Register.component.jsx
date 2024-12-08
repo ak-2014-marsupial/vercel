@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {authActions} from "../auth.slice";
 import {joiResolver} from "@hookform/resolvers/joi";
@@ -13,7 +12,6 @@ import {GoogleAuthButton} from "../GoogleAuthButton";
 const RegisterComponent = () => {
     const dispatch = useDispatch();
     const {registerError} = useSelector(state => state.auth);
-    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -49,8 +47,6 @@ const RegisterComponent = () => {
                 <InputComponent type="password" name="Confirm password" registerField="re_password"
                                 register={register} errors={errors}/>
                 <InputComponent type="text" name="name" registerField="name"
-                                register={register} errors={errors}/>
-                <InputComponent type="text" name="age" registerField="age"
                                 register={register} errors={errors}/>
 
                 <button disabled={!isValid} type="submit">Register</button>

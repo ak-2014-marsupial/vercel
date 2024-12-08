@@ -5,8 +5,8 @@ import {appConstants} from "../../constants/app.constants";
 const currentUser = JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null;
 
 const setInitRole=(currentUser)=>{
-    if(!currentUser)return [];
-    return [currentUser.roles[0].title]
+    if(!currentUser)return null;
+    return currentUser.roles[0].title;
 }
 
 const initialState = {
@@ -67,16 +67,17 @@ const authSlice = createSlice({
     reducers: {
         logOut: (state) => {
             state.currentUser = null;
-            state.currentRole = [];
+            state.currentRole = null;
             localStorage.removeItem(appConstants.accessTokenKey)
             localStorage.removeItem(appConstants.refreshTokenKey)
         },
 
         setIsSessionSave: (state, action) => {
-            // state.isSessionSave = !Boolean(state.isSessionSave);
-            //toggles the boolean value of isSessionSave.
-            console.log("press CheckBox");
             state.isSessionSave ^= true;
+        },
+
+        setCurrentRole:(state,action)=>{
+            state.currentRole=action.payload?.title || null
         }
     },
     extraReducers: builder =>

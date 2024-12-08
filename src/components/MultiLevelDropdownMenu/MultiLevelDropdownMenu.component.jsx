@@ -1,9 +1,9 @@
 import React from 'react';
 import {MenuItemsComponent} from "./MenuItems.component";
 
-import css from "./Dropdown.module.css";
+import css from "./MultiLevelDropdown.module.css";
 
-const DropdownComponent = ({submenus, dropdown, depthLevel}) => {
+const MultiLevelDropdownMenuComponent = ({submenus, dropdown, depthLevel}) => {
     if(!submenus) return  null
 
     depthLevel = depthLevel + 1;
@@ -20,4 +20,4 @@ const DropdownComponent = ({submenus, dropdown, depthLevel}) => {
     );
 };
 
-export {DropdownComponent};
+export {MultiLevelDropdownMenuComponent};
