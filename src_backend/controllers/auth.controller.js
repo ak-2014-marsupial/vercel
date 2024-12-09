@@ -7,7 +7,6 @@ class AuthController {
             const dto = req.body;
             const result = await authService.signUp(dto);
             res.status(201).json(result);
-
             return null;
         } catch (error) {
             throw new ApiError(`${error.message}`, error?.status || 401)
@@ -15,18 +14,21 @@ class AuthController {
     }
 
     async signIn(req, res, params = {}) {
-
+        try {
             const dto = req.body;
             const result = await authService.signIn(dto)
             res.status(201).json(result);
             return null;
-
+        } catch (error) {
+            throw new ApiError(`${error.message}`, error?.status || 401);
+        }
     }
 
     async signInWithGoogle(req, res, params = {}) {
-        const result = await authService.googleAuth(params);
-        res.status(201).json(result);
         try {
+            const result = await authService.googleAuth(params);
+            res.status(201).json(result);
+
         } catch (error) {
             throw new ApiError(`${error.message}`, error?.status || 401);
         }
