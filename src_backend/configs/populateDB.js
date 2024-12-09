@@ -15,7 +15,7 @@ const defaultRoles = JSON.parse(configs.DEFAULT_ROLES)
 const populateDB = async () => {
     try {
         const initialization = await Initialization.findOne();
-        if (initialization && initialization.populated) {
+        if (initialization && initialization.isPopulated) {
             return
         }
 
@@ -41,9 +41,9 @@ const populateDB = async () => {
 
         if (!initialization) {
 
-            await Initialization.create({populated: true});
+            await Initialization.create({isPopulated: true});
         } else {
-            initialization.populated = true;
+            initialization.isPopulated = true;
             await initialization.save();
         }
 
