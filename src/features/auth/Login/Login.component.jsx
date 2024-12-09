@@ -5,7 +5,7 @@ import {authActions} from "../auth.slice";
 
 import css from "./Login.module.css"
 import {InputComponent} from "../../../components/Input/Input.component";
-import {GoogleAuthButton} from "../GoogleAuthButton";
+// import {GoogleAuthButton} from "../GoogleAuthButton";
 import {DelimiterComponent} from "../components/Delimeter";
 import BorderComponent from "../../../components/Border";
 import {Link} from "react-router-dom";
@@ -45,7 +45,7 @@ const LoginComponent = () => {
                 </form>
                 <div>Don`t have an account  <Link to={"/register"}>SignUp</Link></div>
                 <DelimiterComponent>OR</DelimiterComponent>
-                <GoogleAuthButton/>
+                {/*<GoogleAuthButton/>*/}
             </div>
         </BorderComponent>
     );

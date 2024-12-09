@@ -7,7 +7,7 @@ import {populateDB} from "./populateDB";
 const connectDB = async () => {
     try {
         const dbConnection = await mongoose.connect(process.env.DB_URL);
-        console.log("ConnectionDB:",dbConnection.connections[0].port);
+        // console.log("ConnectionDB:",dbConnection.connections[0].port);
 
 
     } catch (error) {

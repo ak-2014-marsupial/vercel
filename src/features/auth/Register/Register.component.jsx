@@ -7,7 +7,7 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import css from "./Register.module.css"
 import {registerValidator} from "../../../validators/register.validator";
 import {InputComponent} from "../../../components/Input/Input.component";
-import {GoogleAuthButton} from "../GoogleAuthButton";
+// import {GoogleAuthButton} from "../GoogleAuthButton";
 import BorderComponent from "../../../components/Border";
 import {DelimiterComponent} from "../components/Delimeter";
 import {Link} from "react-router-dom";
@@ -59,7 +59,7 @@ const RegisterComponent = () => {
                 </form>
                 <div>Don`t have an account <Link to={"/login"}>Login</Link></div>
                 <DelimiterComponent>OR</DelimiterComponent>
-                <GoogleAuthButton/>
+                {/*<GoogleAuthButton/>*/}
             </div>
         </BorderComponent>
     );

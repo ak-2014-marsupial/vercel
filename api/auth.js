@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         const handler = getHandler(method, path);
         await handler(req, res);
     } catch (error) {
-        console.log("auth.js:", error);
+        console.log("auth.js:", error.message);
         return res.status(error?.status || 500).json({message: error?.message, status: error?.status});
     }
 
