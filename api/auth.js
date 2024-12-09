@@ -1,7 +1,6 @@
 import connectDB from "../src_backend/configs/connectionDB";
 import {getHandler} from "../src_backend/routes";
-import {populateDB} from "../src_backend/configs/populateDB";
-import {configs} from "../src_backend/configs/config";
+// import {populateDB} from "../src_backend/configs/populateDB";
 
 export default async function handler(req, res) {
 
@@ -33,7 +32,7 @@ export default async function handler(req, res) {
 
     try {
         await connectDB();
-        await populateDB();
+        // await populateDB();
 
         const handler = getHandler(method, path);
         await handler(req, res);
