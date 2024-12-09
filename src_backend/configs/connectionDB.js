@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
 import {ApiError} from "../errors/api.error";
-import {Role} from "../models/role.model";
-import {rolesNew, User} from "../models/user.model";
-import {populateDB} from "./populateDB";
+
+import {configs} from "./config";
 
 const connectDB = async () => {
+    console.log("start connect to DB....");
     try {
-        const dbConnection = await mongoose.connect(process.env.DB_URL);
-        // console.log("ConnectionDB:",dbConnection.connections[0].port);
-
+        const dbConnection = await mongoose.connect(configs.DB_URL);
+        console.log(`2.MongoDB connected:${dbConnection.connection.host}/${dbConnection.connection.name}`);
 
     } catch (error) {
         console.log("Connection error:", error.message)
