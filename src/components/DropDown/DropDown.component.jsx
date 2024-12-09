@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import css from "./DropDown.module.css"
 import {SlArrowDown, SlArrowUp} from "react-icons/sl";
 import {useClickOutside} from "../../hooks/useClickOutside";
-import {useClickInside} from "../../hooks/useClickInside";
 
 
 const DropDownComponent = (props) => {

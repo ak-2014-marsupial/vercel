@@ -25,7 +25,7 @@ const RequireAuth = ({children}) => {
         } else {
             dispatch(authActions.logOut())
         }
-    }, []);
+    }, [dispatch]);
 
     const {currentUser} = useSelector(state => state.auth)
 

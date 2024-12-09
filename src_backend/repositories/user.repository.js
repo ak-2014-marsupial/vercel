@@ -14,8 +14,7 @@ class UserRepository {
 
     async getByParams(params) {
         const user = await User.findOne(params);
-        console.log("user repository: ", {params, user});
-
+        // console.log("user repository: ", {params, user});
         return this?._populateRoles(user);
     }
 
