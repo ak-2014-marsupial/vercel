@@ -10,14 +10,14 @@ import {userController} from "./controllers/user.controller";
 const routes = {
     POST: {
         "/api/auth/sign-in": mainHandler(commonMiddleware.isBodyValid( UserValidator.login), authController.signIn),
+        "/api/auth/sign-in/google": mainHandler( authMiddleware.checkGoogleCredential, authController.signInWithGoogle),
         "/api/auth/sign-up": mainHandler(commonMiddleware.isBodyValid(UserValidator.createUser), authController.signUp),
         "/api/auth/refresh": mainHandler(authMiddleware.checkRefreshToken, authController.refresh),
     },
     GET: {
         "/api/auth/me": mainHandler(authMiddleware.checkAccessToken, userController.getMe),
         "/api/auth/users": mainHandler(userController.getAll),
-        "/api/auth/google": mainHandler(userController.googleSignIn),
-        "/api/auth/google/callback": mainHandler(userController.googleCallBack),
+
         "/api/auth/:userId": userController.getById,
     },
     DELETE: {

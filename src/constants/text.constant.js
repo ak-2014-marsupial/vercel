@@ -3,7 +3,10 @@ const textConstants = {
     dataUpdate: "Оновлення Даних",
     about: "Про",
     register:"Зареєструватись",
-    login:"Увійти"
+    login:"Увійти",
+    home:"Домашня",
+    settings:"Налаштування",
+    users:"Співробітники",
 
 
 

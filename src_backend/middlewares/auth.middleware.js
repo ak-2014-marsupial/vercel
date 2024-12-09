@@ -1,6 +1,10 @@
 import {ApiError} from "../errors/api.error";
 import {tokenService} from "../services/token.service";
 import {tokenRepository} from "../repositories/token.repository";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+import jwkToPem from "jwk-to-pem";
+import {configs} from "../configs/config";
 
 class AuthMiddleware {
 
@@ -46,6 +50,39 @@ class AuthMiddleware {
             params["oldTokensId"] = pair._id;
             return params;
 
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async checkGoogleCredential(req, res, params = {}) {
+        try {
+            const token = req.body.credential;
+            const response = await axios.get('https://www.googleapis.com/oauth2/v3/certs');
+            const keys = response.data.keys;
+
+            // Decode the token to get the header
+            const decodedHeader = jwt.decode(token, {complete: true});
+            const kid = decodedHeader.header.kid;
+            // Find the corresponding public key
+            const key = keys.find(k => k.kid === kid);
+
+            if (!key) {
+                throw new ApiError("Public key not found", 401);
+            }
+            const pemKey = jwkToPem(key);
+
+            // Verify the token using the public key
+            const verifiedToken = jwt.verify(token, pemKey, {
+                algorithms: ['RS256'],
+                audience: configs.GOOGLE_CLIENT_ID,
+            });
+            params["email"] = verifiedToken.email;
+            params["googleId"] = verifiedToken.sub;
+            params["given_name"] = verifiedToken.given_name;
+            params["family_name"] = verifiedToken.family_name;
+
+            return params;
         } catch (error) {
             throw error;
         }

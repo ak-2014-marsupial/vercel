@@ -3,7 +3,6 @@ import {regexConstant} from "../constants/regex.constant";
 
 export class UserValidator {
     static userName = joi.string().min(3).trim();
-    static age = joi.number().min(15).max(50);
     static email = joi
         .string()
         .lowercase()
@@ -14,7 +13,6 @@ export class UserValidator {
 
     static createUser = joi.object({
         name: this.userName.required(),
-        age: this.age.required(),
         email: this.email.required(),
         password: this.password.required(),
         // phone: this.phone.required(),
@@ -22,7 +20,6 @@ export class UserValidator {
 
     static updateUser = joi.object({
         name: this.userName,
-        age: this.age,
         email: this.email,
         phone: this.phone,
     });

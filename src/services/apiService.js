@@ -1,7 +1,7 @@
 import axios from "axios";
 import {baseURL, urls} from "../constants/urls.constants";
 import {authService} from "./authService";
-import {router} from "../router";
+import {router} from "../routes/router";
 
 // const baseURL="https://test-three-sage-59.vercel.app"
 
@@ -69,6 +69,7 @@ const runAfterRefresh = () => {
         cb()
     }
 }
+
 
 
 export {

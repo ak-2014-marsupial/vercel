@@ -1,12 +1,12 @@
-import {InventoryPage} from "./Pages/InventoryPage";
+import {InventoryPage} from "../Pages/InventoryPage";
 import {createBrowserRouter, Navigate} from "react-router-dom";
-import {RequireAuth} from "./hoc/RequireAuth";
-import {AboutPage} from "./Pages/AboutPage";
+import {RequireAuth} from "../hoc/RequireAuth";
+import {AboutPage} from "../Pages/AboutPage";
 import React from "react";
-import {MainLayout} from "./layouts/MainLayout";
-import {LoginPage} from "./Pages/LoginPage";
-import {RegisterPage} from "./Pages/RegisterPage";
-import {textConstants} from "./constants/text.constant";
+import {MainLayout} from "../layouts/MainLayout";
+import {LoginPage} from "../Pages/LoginPage";
+import {RegisterPage} from "../Pages/RegisterPage";
+import {textConstants} from "../constants/text.constant";
 
 // const router = createHashRouter([
 const router = createBrowserRouter([

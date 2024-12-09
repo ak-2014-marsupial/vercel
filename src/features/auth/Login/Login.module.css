@@ -5,4 +5,9 @@
     align-items: center;
     gap:1.5rem;
     height: 100%;
+
+}
+.line{
+    border-bottom: 2px solid var(--border-color);
+    width: 100%;
 }

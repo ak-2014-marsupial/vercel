@@ -1,11 +1,11 @@
 import React from 'react';
-import {LoginComponent} from "../components/Login/Login.component";
+import {LoginComponent} from "../features/auth/Login/Login.component";
 
 const LoginPage = () => {
     return (
-        <div>
+<div >
            <LoginComponent/>
-        </div>
+</div>
     );
 };
 

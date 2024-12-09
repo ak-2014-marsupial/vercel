@@ -1,0 +1,16 @@
+.delimiter{
+    width: 100%;
+    position: relative;
+    border-top: 2px solid var(--border-color);
+
+}
+
+
+.text{
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--background-color);
+    padding: 0 5px;
+}
