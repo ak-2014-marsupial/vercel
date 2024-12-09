@@ -1,0 +1,14 @@
+.border{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    border-radius: calc(0.7 * var(--radius));
+    box-shadow: 0 0 10px 0 var(--shadow-color);
+}
