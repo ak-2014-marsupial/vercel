@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import css from "./DropDown.module.css"
 import {SlArrowDown, SlArrowUp} from "react-icons/sl";
+import {useClickOutside} from "../../hooks/useClickOutside";
+import {useClickInside} from "../../hooks/useClickInside";
 
 
 const DropDownComponent = (props) => {
@@ -12,19 +14,19 @@ const DropDownComponent = (props) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState("");
+    const clickRef = useRef();
     useEffect(() => {
         setSelectedItem(title)
     }, [title]);
-    if (!items) return null;
 
-
+    useClickOutside(clickRef,()=>setIsOpen(false));
     const itemsToDropList = items.filter(i => i.title !== selectedItem)
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
     }
     const handleItemClick = (item) => {
         setSelectedItem(item?.title);
-        setIsOpen(false);
+        // setIsOpen(false);
         cb(item)
     }
     if (items.length <= 1) {
@@ -35,12 +37,17 @@ const DropDownComponent = (props) => {
         )
     }
 
+
+
+
     const renderArrow = (isOpen) => {
         return isOpen ? <SlArrowUp className={css.icon}/> : <SlArrowDown className={css.icon}/>
     }
 
+    if (!items) return null;
+
     return (
-        <div className={css.dropdown}>
+        <div className={css.dropdown} ref={clickRef}>
             <button className={css.dropdown_toggle} onClick={toggleDropdown}
             >{selectedItem || ""} {renderArrow(isOpen)}
             </button>

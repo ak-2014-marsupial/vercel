@@ -1,30 +1,22 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {MultiLevelDropdownMenuComponent} from "./MultiLevelDropdownMenu.component";
 
 import {SlArrowDown, SlArrowUp, SlArrowLeft, SlArrowRight} from "react-icons/sl";
 import css from "./MultiLevelDropdown.module.css"
 import {NavLink} from "react-router-dom";
+import {useClickOutside} from "../../hooks/useClickOutside";
 
 const MenuItemsComponent = (props) => {
     const {items, depthLevel} = props;
     const [dropdown, setDropdown] = useState(false);
 
-    let ref = useRef();
+    const clickRef = useRef();
 
-    useEffect(() => {
-        const handler = (event) => {
-            if (dropdown && ref.current && !ref.current.contains(event.target)) {
-                setDropdown(false);
-            }
-        };
-        document.addEventListener('mousedown', handler);
-        document.addEventListener('touchstart', handler);
-        return () => {
-            // Cleanup the event listener
-            document.removeEventListener('mousedown', handler);
-            document.removeEventListener('touchstart', handler);
-        };
-    }, [dropdown]);
+    const handleClickOutside=()=>{
+        setDropdown(false);
+    }
+    useClickOutside(clickRef, handleClickOutside)
+
 
     const onMouseEnter = () => {
         window.innerWidth > 960 && setDropdown(true);
@@ -40,10 +32,11 @@ const MenuItemsComponent = (props) => {
 
     const toggleDropdown = (e, items) => {
         e.stopPropagation();
-        setDropdown((prev) => !prev);
         if (items.cb) {
             items.cb(items.title)
         }
+        setDropdown((prev) => !prev);
+
     }
 
     const renderButton = (items) => {
@@ -74,7 +67,7 @@ const MenuItemsComponent = (props) => {
     }
 
     return (
-        <li className={css.menu_items} ref={ref} onMouseEnter={onMouseEnter}
+        <li className={css.menu_items} ref={clickRef} onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave} onClick={closeDropdown}
         >
             {renderButton(items)}
