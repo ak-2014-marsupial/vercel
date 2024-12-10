@@ -44,9 +44,7 @@ class AuthService {
 
         try {
             let user = await userRepository.getByParams({email: dto.email});
-            console.log("auth.service: ",user);
             if (!user) {
-                // user = await userRepository.create(dto);
                 user = await userRepository.create({
                     ...dto,
                     name: `${dto.given_name} ${dto.family_name}`,

@@ -2,15 +2,16 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {joiResolver} from "@hookform/resolvers/joi";
-
-import css from "./Register.module.css"
-// import {GoogleAuthButton} from "../GoogleAuthButton";
 import {Link} from "react-router-dom";
+
+import {authActions} from "../auth.slice.js";
+import {registerValidator} from "../../../validators/register.validator.js";
 import BorderComponent from "../../../components/Border/index.jsx";
 import {InputComponent} from "../../../components/Input/Input.component.jsx";
 import {DelimiterComponent} from "../components/Delimeter/index.jsx";
-import {registerValidator} from "../../../validators/register.validator.js";
-import {authActions} from "../auth.slice.js";
+import {GoogleAuthButton} from "../GoogleAuthButton.jsx";
+
+import css from "./Register.module.css"
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const RegisterComponent = () => {
                 </form>
                 <div>Don`t have an account <Link to={"/login"}>Login</Link></div>
                 <DelimiterComponent>OR</DelimiterComponent>
-                {/*<GoogleAuthButton/>*/}
+                <GoogleAuthButton/>
             </div>
         </BorderComponent>
     );

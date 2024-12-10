@@ -4,10 +4,9 @@ import {ApiError} from "../errors/api.error.js";
 import {configs} from "./config.js";
 
 const connectDB = async () => {
-    console.log("start connect to DB....");
     try {
         const dbConnection = await mongoose.connect(configs.DB_URL);
-        console.log(`2.MongoDB connected:${dbConnection.connection.host}/${dbConnection.connection.name}`);
+        // console.log(`2.MongoDB connected:${dbConnection.connection.host}/${dbConnection.connection.name}`);
 
     } catch (error) {
         console.log("Connection error:", error.message)
