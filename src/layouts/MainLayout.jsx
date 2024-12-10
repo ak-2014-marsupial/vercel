@@ -1,7 +1,8 @@
 import React from 'react';
-import {Header} from "../components/Header/Header";
 import {Outlet} from "react-router-dom";
-import LoaderComponent from "../components/Loader/Loader.component";
+
+import {Header} from "../components/Header/Header.jsx";
+import LoaderComponent from "../components/Loader/Loader.component.jsx";
 
 const MainLayout = () => {
 

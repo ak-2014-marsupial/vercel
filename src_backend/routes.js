@@ -1,10 +1,10 @@
-import {ApiError} from "./errors/api.error";
-import {mainHandler} from "./handlers/main.handler";
-import {authController} from "./controllers/auth.controller";
-import {commonMiddleware} from "./middlewares/common.middleware";
-import {UserValidator} from "./validators/user.validator";
-import {authMiddleware} from "./middlewares/auth.middleware";
-import {userController} from "./controllers/user.controller";
+import {ApiError} from "./errors/api.error.js";
+import {mainHandler} from "./handlers/main.handler.js";
+import {authController} from "./controllers/auth.controller.js";
+import {commonMiddleware} from "./middlewares/common.middleware.js";
+import {UserValidator} from "./validators/user.validator.js";
+import {authMiddleware} from "./middlewares/auth.middleware.js";
+import {userController} from "./controllers/user.controller.js";
 
 
 const routes = {

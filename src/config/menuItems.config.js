@@ -1,7 +1,8 @@
-import {textConstants} from "../constants/text.constant";
-import {authActions} from "../features/auth/auth.slice";
 import {useDispatch, useSelector} from "react-redux";
-import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component";
+
+import {textConstants} from "../constants/text.constant.js";
+import {authActions} from "../features/auth/auth.slice.js";
+import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component.jsx";
 
 const useCheckedState = () => {
     const result =Boolean(useSelector(state => state.auth.isSessionSave))

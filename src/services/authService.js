@@ -1,6 +1,6 @@
-import {apiService} from "./apiService";
-import {appConstants} from "../constants/app.constants";
-import {urls} from "../constants/urls.constants";
+import {apiService} from "./apiService.js";
+import {appConstants} from "../constants/app.constants.js";
+import {urls} from "../constants/urls.constants.js";
 
 
 const authService = {

@@ -1,6 +1,7 @@
-import * as jsonwebtoken from "jsonwebtoken";
-import {configs} from "../configs/config";
-import {ApiError} from "../errors/api.error";
+// import * as jsonwebtoken from "jsonwebtoken"; for Typescript
+import {configs} from "../configs/config.js";
+import {ApiError} from "../errors/api.error.js";
+import jsonwebtoken from "jsonwebtoken";
 
 class TokenService {
     async generatePair(payload) {

@@ -1,5 +1,6 @@
-import {configs} from "../configs/config";
 import bcrypt from "bcrypt";
+
+import {configs} from "../configs/config.js";
 
 class PasswordService{
     async hashPassword(password){

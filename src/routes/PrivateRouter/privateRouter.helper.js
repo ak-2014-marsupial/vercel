@@ -1,6 +1,7 @@
 import {Navigate, Route} from "react-router-dom";
 import React from "react";
-import {privateRoutes} from "../../config/privateRouter.config";
+
+import {privateRoutes} from "../../config/privateRouter.config.js";
 
 const renderRoutes = (routes) => {
     return routes.map((item) => {

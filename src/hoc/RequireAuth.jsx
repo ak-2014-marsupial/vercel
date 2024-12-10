@@ -3,8 +3,8 @@ import {Navigate, useLocation, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {jwtDecode} from "jwt-decode";
 
-import {appConstants} from "../constants/app.constants";
-import {authActions} from "../features/auth/auth.slice";
+import {appConstants} from "../constants/app.constants.js";
+import {authActions} from "../features/auth/auth.slice.js";
 
 const RequireAuth = ({children}) => {
     const [searchParams] = useSearchParams();

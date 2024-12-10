@@ -1,4 +1,4 @@
-import {Token} from "../models/token.model";
+import {Token} from "../models/token.model.js";
 
 class TokenRepository {
     async create(dto) {

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
-import {authService} from "../../services/authService";
-import {appConstants} from "../../constants/app.constants";
+import {authService} from "../../services/authService.js";
+import {appConstants} from "../../constants/app.constants.js";
 
 const currentUser = JSON.parse(localStorage.getItem(appConstants.localStorageKeyCurrentUser)) || null;
 

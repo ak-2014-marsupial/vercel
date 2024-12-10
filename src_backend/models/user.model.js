@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import {Schema} from "mongoose";
-import {Role} from "./role.model";
+
+import {Role} from "./role.model.js";
 
 const providers = ["email/password", "google", "init"];
 

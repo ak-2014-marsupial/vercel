@@ -1,8 +1,8 @@
-import {Initialization} from "../models/Initialization.model";
-import {Role} from "../models/role.model";
-import {User} from "../models/user.model";
-import {passwordService} from "../services/password.service";
-import {configs} from "./config";
+import {Initialization} from "../models/Initialization.model.js";
+import {Role} from "../models/role.model.js";
+import {passwordService} from "../services/password.service.js";
+import {configs} from "./config.js";
+import {User} from "../models/user.model.js";
 
 // const defaultRoles = [
 //     {title: 'guest', rate: 100},

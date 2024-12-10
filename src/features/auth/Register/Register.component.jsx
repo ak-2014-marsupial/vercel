@@ -1,16 +1,16 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
-import {authActions} from "../auth.slice";
 import {joiResolver} from "@hookform/resolvers/joi";
 
 import css from "./Register.module.css"
-import {registerValidator} from "../../../validators/register.validator";
-import {InputComponent} from "../../../components/Input/Input.component";
 // import {GoogleAuthButton} from "../GoogleAuthButton";
-import BorderComponent from "../../../components/Border";
-import {DelimiterComponent} from "../components/Delimeter";
 import {Link} from "react-router-dom";
+import BorderComponent from "../../../components/Border/index.jsx";
+import {InputComponent} from "../../../components/Input/Input.component.jsx";
+import {DelimiterComponent} from "../components/Delimeter/index.jsx";
+import {registerValidator} from "../../../validators/register.validator.js";
+import {authActions} from "../auth.slice.js";
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();

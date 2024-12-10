@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import {ApiError} from "../errors/api.error";
 
-import {configs} from "./config";
+import {ApiError} from "../errors/api.error.js";
+import {configs} from "./config.js";
 
 const connectDB = async () => {
     console.log("start connect to DB....");

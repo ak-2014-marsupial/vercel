@@ -1,6 +1,6 @@
-import connectDB from "../src_backend/configs/connectionDB";
-import {getHandler} from "../src_backend/routes";
-// import {populateDB} from "../src_backend/configs/populateDB";
+import connectDB from "../src_backend/configs/connectionDB.js";
+import {getHandler} from "../src_backend/routes.js";
+// import {populateDB} from "../src_backend/configs/populateDB.js";
 
 export default async function handler(req, res) {
 

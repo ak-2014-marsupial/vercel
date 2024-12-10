@@ -1,7 +1,7 @@
-import {UsersPage} from "../Pages/UsersPage";
-import {DashboardPage} from "../Pages/DashboardPage";
-import {ProfilePage} from "../Pages/ProfilePage";
-import {InventoryPage} from "../Pages/InventoryPage";
+import {UsersPage} from "../Pages/UsersPage.jsx";
+import {DashboardPage} from "../Pages/DashboardPage.jsx";
+import {ProfilePage} from "../Pages/ProfilePage.jsx";
+import {InventoryPage} from "../Pages/InventoryPage.jsx";
 
 const u1 = () => (<h1>U1</h1>)
 const u2 = () => (<h1>U2</h1>)

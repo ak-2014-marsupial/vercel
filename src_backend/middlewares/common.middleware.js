@@ -1,5 +1,6 @@
-import {ApiError} from "../errors/api.error";
 import {isObjectIdOrHexString} from "mongoose";
+
+import {ApiError} from "../errors/api.error.js";
 
 class CommonMiddleware {
     isValid(paramName) {

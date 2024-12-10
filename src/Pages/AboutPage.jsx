@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {DropDownComponent} from "../components/DropDown/DropDown.component";
+
+import {DropDownComponent} from "../components/DropDown/DropDown.component.jsx";
 
 const AboutPage = () => {
     const [result, setResult] = useState("")

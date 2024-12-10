@@ -1,7 +1,7 @@
-import {handlerCORS} from "../src_backend/handlers/cors.handler";
-import connectDB from "../src_backend/configs/connectionDB";
-import {ApiError} from "../src_backend/errors/api.error";
-import {userRepository} from "../src_backend/repositories/user.repository";
+import {handlerCORS} from "../src_backend/handlers/cors.handler.js";
+import connectDB from "../src_backend/configs/connectionDB.js";
+import {ApiError} from "../src_backend/errors/api.error.js";
+import {userRepository} from "../src_backend/repositories/user.repository.js";
 
 export default async function handler(req, res) {
     // CORS

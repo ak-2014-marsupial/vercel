@@ -1,10 +1,11 @@
-import {ApiError} from "../errors/api.error";
-import {tokenService} from "../services/token.service";
-import {tokenRepository} from "../repositories/token.repository";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import jwkToPem from "jwk-to-pem";
-import {configs} from "../configs/config";
+
+import {ApiError} from "../errors/api.error.js";
+import {tokenService} from "../services/token.service.js";
+import {tokenRepository} from "../repositories/token.repository.js";
+import {configs} from "../configs/config.js";
 
 class AuthMiddleware {
 

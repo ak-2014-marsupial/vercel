@@ -1,13 +1,14 @@
-import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
-import {AboutPage} from "../Pages/AboutPage";
 import React from "react";
-import {MainLayout} from "../layouts/MainLayout";
-import {LoginPage} from "../Pages/LoginPage";
-import {RegisterPage} from "../Pages/RegisterPage";
-import {textConstants} from "../constants/text.constant";
-import {renderPrivateRoutes} from "./PrivateRouter/privateRouter.helper";
+import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {HomePage} from "../Pages/Home";
+
+import {HomePage} from "../Pages/Home.jsx";
+import {textConstants} from "../constants/text.constant.js";
+import {renderPrivateRoutes} from "./PrivateRouter/privateRouter.helper.js";
+import {MainLayout} from "../layouts/MainLayout.jsx";
+import {AboutPage} from "../Pages/AboutPage.jsx";
+import {LoginPage} from "../Pages/LoginPage.jsx";
+import {RegisterPage} from "../Pages/RegisterPage.jsx";
 
 
 // const router = createHashRouter([

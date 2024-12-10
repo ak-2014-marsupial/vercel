@@ -40,14 +40,14 @@ const DropDownComponent = (props) => {
 
 
     const renderArrow = (isOpen) => {
-        return isOpen ? <SlArrowUp className={css.icon}/> : <SlArrowDown className={css.icon}/>
+        return isOpen ? <SlArrowUp className={css.icon}/> : <SlArrowDown  className={css.icon}/>
     }
 
     if (!items) return null;
 
     return (
-        <div className={css.dropdown} ref={clickRef}>
-            <button className={css.dropdown_toggle} onClick={toggleDropdown}
+        <div className={css.dropdown} ref={clickRef} onClick={toggleDropdown}>
+            <button className={css.dropdown_toggle}
             >{selectedItem || ""} {renderArrow(isOpen)}
             </button>
 

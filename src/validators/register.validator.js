@@ -1,5 +1,6 @@
 import Joi from "joi";
-import {regexConstant} from "../constants/regex.constants";
+
+import {regexConstant} from "../constants/regex.constants.js";
 
 const registerValidator = Joi.object({
     name: Joi.string()

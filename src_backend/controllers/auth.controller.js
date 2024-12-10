@@ -1,5 +1,5 @@
-import {ApiError} from "../errors/api.error";
-import {authService} from "../services/auth.service";
+import {ApiError} from "../errors/api.error.js";
+import {authService} from "../services/auth.service.js";
 
 class AuthController {
     async signUp(req, res, params = {}) {

@@ -1,7 +1,7 @@
 import axios from "axios";
-import {baseURL, urls} from "../constants/urls.constants";
-import {authService} from "./authService";
-import {router} from "../routes/router";
+import {baseURL, urls} from "../constants/urls.constants.js";
+import {authService} from "./authService.js";
+import {router} from "../routes/router.js";
 
 // const baseURL="https://test-three-sage-59.vercel.app"
 

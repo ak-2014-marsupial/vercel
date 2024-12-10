@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {appConstants} from "../../constants/app.constants";
+
+import {appConstants} from "../../constants/app.constants.js";
 
 
 const {localStorageKeyFontSize} = appConstants;

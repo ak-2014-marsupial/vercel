@@ -1,8 +1,8 @@
-import {userRepository} from "../repositories/user.repository";
-import {tokenService} from "./token.service";
-import {tokenRepository} from "../repositories/token.repository";
-import {ApiError} from "../errors/api.error";
-import {passwordService} from "./password.service";
+import {userRepository} from "../repositories/user.repository.js";
+import {tokenService} from "./token.service.js";
+import {tokenRepository} from "../repositories/token.repository.js";
+import {ApiError} from "../errors/api.error.js";
+import {passwordService} from "./password.service.js";
 
 class AuthService {
     async signUp(dto) {

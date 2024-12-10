@@ -1,8 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {appHelperReducer} from "./slices/app.slice";
-import {loadingReducer} from "./slices/loading.slice";
-import {authReducer} from "../features/auth/auth.slice";
-import {appConstants} from "../constants/app.constants";
+
+import {appConstants} from "../constants/app.constants.js";
+import {authReducer} from "../features/auth/auth.slice.js";
+import {loadingReducer} from "./slices/loading.slice.js";
+import {appHelperReducer} from "./slices/app.slice.js";
 
 const store = configureStore({
     reducer: {
