@@ -6,22 +6,20 @@ import {Header} from "../components/Header/Header.jsx";
 import LoaderComponent from "../components/Loader/Loader.component.jsx";
 
 const MainLayout = () => {
-    const {fontSize} = useSelector(state => state.app);
+    const {fontSize, theme} = useSelector(state => state.app);
 
     useEffect(() => {
-        document.documentElement.style.fontSize=`${fontSize}px`
+        document.documentElement.style.fontSize = `${fontSize}px`
     }, [fontSize]);
-
-
     return (
-        <div className="container">
+        <div className={`app_${theme}_theme container`}>
             <Header/>
-             <LoaderComponent/>
+            <LoaderComponent/>
             <div className="outlet">
-            <Outlet />
+                <Outlet/>
             </div>
         </div>
     );
 };
 
-export  {MainLayout};
+export {MainLayout};

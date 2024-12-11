@@ -7,7 +7,7 @@ import {store} from "./redux/store.js";
 import {appConstants} from "./constants/app.constants.js";
 import {AppRouter} from "./routes/index.js";
 
-import './index.css';
+import './styles/index.css';
 
 const clientId=appConstants.googleClientId;
 const root = ReactDOM.createRoot(document.getElementById('root'));

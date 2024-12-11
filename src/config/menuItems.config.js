@@ -1,14 +1,9 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 import {textConstants} from "../constants/text.constant.js";
 import {authActions} from "../features/auth/auth.slice.js";
-import {appHelperActions} from "../redux/slices/app.slice.js";
-import {FontSizeChangerComponent} from "../components/FontSizeChanger/FontSizeChanger.component.jsx";
-import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component.jsx";
 
-const useCheckedState = (slice, key) => {
-    return Boolean(useSelector(state => state[slice][key]));
-};
+
 
 const useItemsConfig = () => {
     const dispatch = useDispatch();

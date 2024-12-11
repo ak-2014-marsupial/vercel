@@ -1,15 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import css from "./DropDown.module.css"
+import css from "./Dropdown2.module.css"
+import {useClickOutside} from "../../hooks/useClickOutside.jsx";
 import {SlArrowDown, SlArrowUp} from "react-icons/sl";
-import {useClickOutside} from "../../hooks/useClickOutside";
 
-
-const DropDownComponent = (props) => {
-    const {
-        items, title, cb = () => {
-        }
-    } = props;
+const DropdownComponent2 = (props) => {
+    const {items, title, titlePrefix, cb} = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState("");
@@ -19,20 +15,19 @@ const DropDownComponent = (props) => {
     }, [title]);
 
     useClickOutside(clickRef, () => setIsOpen(false));
-    const itemsToDropList = items.filter(i => i.title !== selectedItem)
+    const itemsToDropList = items.filter(i => i !== selectedItem)
     const toggleDropdown = (e) => {
         e.stopPropagation();
         setIsOpen(!isOpen)
     }
     const handleItemClick = (item) => {
-        setSelectedItem(item?.title);
-        // setIsOpen(false);
+        setSelectedItem(item);
         cb(item)
     }
     if (items.length <= 1) {
         return (
             <div className={css.dropdown}>
-                <div className={css.dropdown_toggle}>{selectedItem || ""} </div>
+                <div className={css.dropdown_toggle}>{titlePrefix} {selectedItem || ""} </div>
             </div>
         )
     }
@@ -46,15 +41,15 @@ const DropDownComponent = (props) => {
 
     return (
         <div className={css.dropdown} ref={clickRef}>
-            <button className={css.dropdown_toggle} onClick={(e)=>toggleDropdown(e)}>
-                {selectedItem || ""} {renderArrow(isOpen)}
-            </button>
+            <span className={css.dropdown_toggle} onClick={(e) => toggleDropdown(e)}>
+                {titlePrefix} {selectedItem || ""} {renderArrow(isOpen)}
+            </span>
 
             {isOpen && <ul className={css.dropdown_menu}>
-                {itemsToDropList.map(item =>
-                    <li key={item._id}
+                {itemsToDropList.map((item, index) =>
+                    <li key={index}
                         onClick={() => handleItemClick(item)}
-                    >{item.title}
+                    >{item}
                     </li>)
                 }
             </ul>}
@@ -62,4 +57,10 @@ const DropDownComponent = (props) => {
     );
 };
 
-export {DropDownComponent};
+DropdownComponent2.defaultProps = {
+    cb: () => {
+    }, // Пустая функция
+    titlePrefix: ""
+};
+
+export {DropdownComponent2};

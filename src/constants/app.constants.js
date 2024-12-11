@@ -5,6 +5,8 @@ const appConstants = {
     localStorageKeyFontSize: "fontSize",
     localStorageKeyCurrentUser:"currentUser",
     localStorageKeyIsDropdownOnHover:"isDropdownOnHover",
+    localStorageKeyTheme:"theme",
+    availableThemes:["light","dark"],
     googleClientId:process.env.REACT_APP_GOOGLE_AUTH_KEY,
     fontSizeMin:14,
     fontSizeMax:18,

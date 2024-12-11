@@ -1,16 +1,21 @@
 import {useDispatch, useSelector} from "react-redux";
 
-import {textConstants} from "../constants/text.constant.js";
 import {authActions} from "../features/auth/auth.slice.js";
 import {appHelperActions} from "../redux/slices/app.slice.js";
 import {FontSizeChangerComponent} from "../components/FontSizeChanger/FontSizeChanger.component.jsx";
 import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component.jsx";
 import {BsFillGearFill} from "react-icons/bs";
 import {GrLanguage} from "react-icons/gr";
+import {appConstants} from "../constants/app.constants.js";
+import {DropdownComponent2} from "../components/DropDown_2/Dropdown.component_2.jsx";
 
 const useCheckedState = (slice, key) => {
     return Boolean(useSelector(state => state[slice][key]));
 };
+
+const useValueByKey = (slice, key) => {
+    return useSelector(state => state[slice][key]);
+}
 
 const useIconsConfig = () => {
     const dispatch = useDispatch();
@@ -45,11 +50,14 @@ const useIconsConfig = () => {
                     component: FontSizeChangerComponent,
                 },
                 {
-                    title: 'Themes', children: [
-                        {title: "Dark"},
-                        {title: "Light"},
-                    ]
-                },
+                    title: "theme",
+                    component: DropdownComponent2,
+                    props: {
+                        items: appConstants.availableThemes,
+                        title: useValueByKey("app", "theme"),
+                        cb: (theme) => dispatch(appHelperActions.setTheme(theme))
+                    }
+                }
             ],
         },
 

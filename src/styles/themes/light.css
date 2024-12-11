@@ -1,0 +1,15 @@
+.app_light_theme{
+    --primary-color:#3498db;
+    --secondary-color:#F4F7FB;
+    --background-color:#F1F2F3;
+    --text-color:#3E706D;
+    --heading-color:#024543;
+    --border-color:#e0e0e0;
+    --border-color-dark:#024543;
+    --link-color:#DDA94B;
+    --accent-color:#3E706D;
+    --success-color:#28a745;
+    --error-color:#dc3545;
+    --warning-color:#ffc107;
+    --shadow-color:#9E9E9E;
+}

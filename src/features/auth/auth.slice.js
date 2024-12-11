@@ -14,7 +14,7 @@ const initialState = {
     loginError: null,
     currentUser,
     currentRole: setInitRole(currentUser),
-    isSessionSave: Boolean(localStorage.getItem(appConstants.localStorageKeyIsSessionSave)),
+    isSessionSave: Boolean(+localStorage.getItem(appConstants.localStorageKeyIsSessionSave)) || 0,
 
 };
 
@@ -77,7 +77,7 @@ const authSlice = createSlice({
         },
 
         setCurrentRole:(state,action)=>{
-            state.currentRole=action.payload?.title || null
+            state.currentRole=action.payload || null
         }
     },
     extraReducers: builder =>

@@ -1,0 +1,7 @@
+:root {
+    --header-height:10vh;
+    --header-min-height:80px;
+    --max-width:1400px;
+    --row-min-height:3rem;
+    --radius: 1rem;
+}
