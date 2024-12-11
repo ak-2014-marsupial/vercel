@@ -4,7 +4,12 @@ const appConstants = {
     localStorageKeyIsSessionSave:"IsSessionSave",
     localStorageKeyFontSize: "fontSize",
     localStorageKeyCurrentUser:"currentUser",
+    localStorageKeyIsDropdownOnHover:"isDropdownOnHover",
     googleClientId:process.env.REACT_APP_GOOGLE_AUTH_KEY,
+    fontSizeMin:14,
+    fontSizeMax:18,
+    fontSizeStep:1,
+
 }
 
 export {appConstants}

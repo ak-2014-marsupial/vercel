@@ -9,10 +9,12 @@
     align-items: center;
     gap: 1rem;
     list-style: none;
+    width: 100%;
 }
 
 .menu_items {
     position: relative;
+    width: 100%;
 }
 .menu_items a {
     display: block;
@@ -21,11 +23,13 @@
     text-decoration: none;
 }
 .menu_items :global(a.active) {
-    color: var(--error-color)
+    color: var(--error-color);
 }
 .menu_items > a, .menu-items button {
     text-align: left;
-    padding: 0.7rem 1rem;
+    /*padding: 0.7rem 1rem;*/
+    width: 100%;
+
 }
 /*.menu_items a:hover,*/
 /*.menu_items button:hover {*/
@@ -50,7 +54,7 @@
     font-size: 1rem;
     z-index: 2;
     min-width: 10rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0 0;
     list-style: none;
     background-color: #fff;
     /*border-radius: 0.2rem;*/
@@ -81,9 +85,12 @@
     background-color: transparent;
     cursor: pointer;
     width: 100%;
-    padding-right: 0;
+    padding-right: 0.3rem;
+    min-height: 2.5rem;
 }
-
+.item_border{
+    border-bottom: 1px solid var(--link-color);
+}
     .icon{
         color: var(--link-color);
         font-size: 1.3rem;

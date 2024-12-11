@@ -21,8 +21,8 @@ const store = configureStore({
 store.subscribe(() => {
     const isSessionSave = store.getState().auth.isSessionSave;
 
-    const key = appConstants.localStorageKeyIsSessionSave;
-    localStorage.setItem(key, JSON.stringify(store.getState().auth.isSessionSave));
+    localStorage.setItem(appConstants.localStorageKeyIsSessionSave, JSON.stringify(store.getState().auth.isSessionSave));
+    localStorage.setItem(appConstants.localStorageKeyIsDropdownOnHover, JSON.stringify(store.getState().app.isDropdownOnHover));
 
     if (isSessionSave) {
         localStorage.setItem(appConstants.localStorageKeyCurrentUser, JSON.stringify(store.getState().auth.currentUser));

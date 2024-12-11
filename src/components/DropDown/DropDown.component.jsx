@@ -18,9 +18,10 @@ const DropDownComponent = (props) => {
         setSelectedItem(title)
     }, [title]);
 
-    useClickOutside(clickRef,()=>setIsOpen(false));
+    useClickOutside(clickRef, () => setIsOpen(false));
     const itemsToDropList = items.filter(i => i.title !== selectedItem)
-    const toggleDropdown = () => {
+    const toggleDropdown = (e) => {
+        e.stopPropagation();
         setIsOpen(!isOpen)
     }
     const handleItemClick = (item) => {
@@ -37,18 +38,16 @@ const DropDownComponent = (props) => {
     }
 
 
-
-
     const renderArrow = (isOpen) => {
-        return isOpen ? <SlArrowUp className={css.icon}/> : <SlArrowDown  className={css.icon}/>
+        return isOpen ? <SlArrowUp className={css.icon}/> : <SlArrowDown className={css.icon}/>
     }
 
     if (!items) return null;
 
     return (
-        <div className={css.dropdown} ref={clickRef} onClick={toggleDropdown}>
-            <button className={css.dropdown_toggle}
-            >{selectedItem || ""} {renderArrow(isOpen)}
+        <div className={css.dropdown} ref={clickRef}>
+            <button className={css.dropdown_toggle} onClick={(e)=>toggleDropdown(e)}>
+                {selectedItem || ""} {renderArrow(isOpen)}
             </button>
 
             {isOpen && <ul className={css.dropdown_menu}>

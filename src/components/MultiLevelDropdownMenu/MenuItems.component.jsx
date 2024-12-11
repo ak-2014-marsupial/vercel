@@ -5,38 +5,43 @@ import {SlArrowDown, SlArrowUp, SlArrowLeft, SlArrowRight} from "react-icons/sl"
 import css from "./MultiLevelDropdown.module.css"
 import {NavLink} from "react-router-dom";
 import {useClickOutside} from "../../hooks/useClickOutside";
+import {useSelector} from "react-redux";
 
 const MenuItemsComponent = (props) => {
     const {items, depthLevel} = props;
     const [dropdown, setDropdown] = useState(false);
+    const isDropdownOnHover = useSelector(state => state.app.isDropdownOnHover)
 
     const clickRef = useRef();
 
-    const handleClickOutside=()=>{
+    const handleClickOutside = () => {
         setDropdown(false);
     }
     useClickOutside(clickRef, handleClickOutside)
 
 
     const onMouseEnter = () => {
-        window.innerWidth > 960 && setDropdown(true);
+        // window.innerWidth > 960 && setDropdown(true);
+        Boolean(isDropdownOnHover) && setDropdown(true);
     };
 
     const onMouseLeave = () => {
-        window.innerWidth > 960 && setDropdown(false);
+        Boolean(isDropdownOnHover) && setDropdown(false);
     };
 
-    const closeDropdown = () => {
+    const closeDropdown = (items) => {
         dropdown && setDropdown(false);
     };
 
     const toggleDropdown = (e, items) => {
-        e.stopPropagation();
+        if (items.children) {
+            e.stopPropagation();
+        }
         if (items.cb) {
             items.cb(items.title)
         }
-        setDropdown((prev) => !prev);
 
+        setDropdown((prev) => !prev);
     }
 
     const renderButton = (items) => {
@@ -50,14 +55,14 @@ const MenuItemsComponent = (props) => {
                 <Component {...props}/></>
         } else buttonTitle = items.title;
 
-        if (!items.children) {
+        if (!items.children || items.noArrow) {
             arrow = null
         } else if (depthLevel === 0) {
             arrow = dropdown ? <SlArrowUp className={css.icon}/> : <SlArrowDown className={css.icon}/>
         } else arrow = dropdown ? <SlArrowLeft className={css.icon}/> : <SlArrowRight className={css.icon}/>
 
         return (
-            <button className={css.btn} type="button" aria-haspopup="menu" aria-expanded={dropdown ? 'true' : 'false'}
+            <button className={ depthLevel>0?`${css.btn} ${css.item_border}`:css.btn  } type="button" aria-haspopup="menu" aria-expanded={dropdown ? 'true' : 'false'}
                     onClick={(e) => toggleDropdown(e, items)}
             >
                 {buttonTitle}
@@ -68,7 +73,8 @@ const MenuItemsComponent = (props) => {
 
     return (
         <li className={css.menu_items} ref={clickRef} onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave} onClick={closeDropdown}
+            onMouseLeave={onMouseLeave} onClick={(items?.isOpenAfterClick) ? () => {
+        } : closeDropdown}
         >
             {renderButton(items)}
             <MultiLevelDropdownMenuComponent depthLevel={depthLevel} submenus={items.children} dropdown={dropdown}/>

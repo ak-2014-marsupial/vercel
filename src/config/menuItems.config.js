@@ -2,16 +2,16 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {textConstants} from "../constants/text.constant.js";
 import {authActions} from "../features/auth/auth.slice.js";
+import {appHelperActions} from "../redux/slices/app.slice.js";
+import {FontSizeChangerComponent} from "../components/FontSizeChanger/FontSizeChanger.component.jsx";
 import {CheckBoxComponent} from "../components/CheckBox/CheckBox.component.jsx";
 
-const useCheckedState = () => {
-    const result =Boolean(useSelector(state => state.auth.isSessionSave))
-    return result;
+const useCheckedState = (slice, key) => {
+    return Boolean(useSelector(state => state[slice][key]));
 };
 
 const useItemsConfig = () => {
     const dispatch = useDispatch();
-    const isChecked = useCheckedState()
 
     const menuItemsConfig = [
         {title: textConstants.inventory, path: '/inventory', permission: ["admin", "manager"]},
@@ -29,7 +29,6 @@ const useItemsConfig = () => {
                                 {
                                     title: 'PHP',
                                     cb: (mess) => console.log(mess),
-
                                 },
                             ],
                         },
@@ -44,28 +43,7 @@ const useItemsConfig = () => {
                 {title: textConstants.register, path: "/register"},
                 {title: "Log OUT", cb: (mess) => dispatch(authActions.logOut(mess))},
                 {title: "Get ME", cb: (mess) => dispatch(authActions.me())},
-
             ]
-        },
-        {
-            title: textConstants.settings, children: [
-                {
-                    title: "Save in LocalStorage",
-                    component: CheckBoxComponent,
-                    props: {
-                        checked: isChecked,
-                        onChange: () => dispatch(authActions.setIsSessionSave())
-                    },
-                    // cb: (mess) => dispatch(authActions.setIsSessionSave())
-                },
-                {
-                    title: 'Themes', children: [
-                        {title: "Dark"},
-                        {title: "Light"},
-                    ]
-                },
-                {title: 'Our values', path: "values"},
-            ],
         },
         {
             title: textConstants.about, path: '/about', children: [

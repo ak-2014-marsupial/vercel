@@ -72,7 +72,7 @@ const authSlice = createSlice({
             localStorage.removeItem(appConstants.refreshTokenKey)
         },
 
-        setIsSessionSave: (state, action) => {
+        setIsSessionSave: (state) => {
             state.isSessionSave ^= true;
         },
 

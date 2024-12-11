@@ -10,7 +10,7 @@ fontSize = fontSize < 10 ? 16 : fontSize;
 
 const initialState = {
     fontSize: fontSize,
-    currentUser: {},
+    isDropdownOnHover: localStorage.getItem(appConstants.localStorageKeyIsDropdownOnHover) || false,
 }
 
 export const appHelperSlice = createSlice({
@@ -22,9 +22,8 @@ export const appHelperSlice = createSlice({
             state.fontSize = fontSize;
             localStorage.setItem(localStorageKeyFontSize, fontSize.toString())
         },
-        setCurrentUser: (state, action) => {
-            const currentUser = action.payload;
-            state.currentUser = currentUser;
+        toggleDropdownOnHover: (state) => {
+            state.isDropdownOnHover ^= true;
         },
 
     }
